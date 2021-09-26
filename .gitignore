@@ -1,0 +1,10 @@
+# junk
+.DS_Store
+
+# virtualenv
+venv/
+
+# dotenv
+.env
+
+*.log
