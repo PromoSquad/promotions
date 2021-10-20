@@ -1,6 +1,9 @@
 # junk
 .DS_Store
 
+# local vagrant
+.vagrant/
+
 # virtualenv
 venv/
 
