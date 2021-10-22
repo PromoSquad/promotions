@@ -49,7 +49,7 @@ Vagrant.configure(2) do |config|
     docker.privileged = true
     docker.volumes = ["/sys/fs/cgroup:/sys/fs/cgroup:ro"]
     # Uncomment to force arm64 for testing images on Intel
-    # docker.create_args = ["--platform=linux/arm64"]     
+    # docker.create_args = ["--platform=linux/arm64"]
   end
 
   ######################################################################
@@ -78,17 +78,17 @@ Vagrant.configure(2) do |config|
     echo "****************************************"
     echo " INSTALLING PYTHON 3 ENVIRONMENT..."
     echo "****************************************"
-    # Install Python 3 and dev tools 
+    # Install Python 3 and dev tools
     apt-get update
     apt-get install -y git vim tree python3 python3-pip python3-venv
     apt-get -y autoremove
-    
+
     # Need PostgreSQL development library to compile on arm64
     apt-get install -y libpq-dev
     # Create a Python3 Virtual Environment and Activate it in .profile
     sudo -H -u vagrant sh -c 'python3 -m venv ~/venv'
     sudo -H -u vagrant sh -c 'echo ". ~/venv/bin/activate" >> ~/.profile'
-    
+
     # Install app dependencies in virtual environment as vagrant user
     sudo -H -u vagrant sh -c '. ~/venv/bin/activate && pip install -U pip && pip install wheel'
     sudo -H -u vagrant sh -c '. ~/venv/bin/activate && cd /vagrant && pip install -r requirements.txt'
