@@ -4,8 +4,9 @@
 # local vagrant
 .vagrant/
 
-# virtualenv
+# python
 venv/
+__pycache__/
 
 # dotenv
 .env
