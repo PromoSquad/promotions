@@ -53,11 +53,13 @@ FLASK_APP=service:app flask run --host=0.0.0.0
 | Column      | Type        | Remark                           |
 | :---------- | :---------- | :------------------------------- |
 | id          | int         | Primary Key                      |
-| productId   | int         | nullable, `null` means universal |
+| product_id  | int         | nullable, `null` means universal |
 | name        | string (63) |                                  |
 | type        | string (63) | "percentage", "coupon", "BOGO"   |
 | description | text        | nullable                         |
 | meta        | json        | Promotion meta info              |
+| begin_date  | timestamp   |                                  |
+| end_date    | timestamp   | nullable                         |
 | active      | boolean     |                                  |
 
 For different promotion type, meta json is in different schema accordingly.
