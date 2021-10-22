@@ -16,7 +16,7 @@ vagrant up
 vagrant ssh
 ```
 
-### Halt 
+### Halt
 
 ```bash
 vagrant halt
@@ -45,3 +45,51 @@ This is with auto-reloader and debugger on. `--reload` enables auto-reloader so 
 ```bash
 FLASK_APP=service:app flask run --host=0.0.0.0
 ```
+
+## Model
+
+### Model: Promotion
+
+| Column      | Type        | Remark                           |
+| :---------- | :---------- | :------------------------------- |
+| id          | int         | Primary Key                      |
+| product_id  | int         | nullable, `null` means universal |
+| name        | string (63) |                                  |
+| type        | string (63) | "percentage", "coupon", "bogo"   |
+| description | text        | nullable                         |
+| meta        | json        | Promotion meta info              |
+| begin_date  | timestamp   |                                  |
+| end_date    | timestamp   | nullable                         |
+| active      | boolean     |                                  |
+
+For different promotion type, meta json is in different schema accordingly.
+
+1. Percentage
+
+   e.g.
+
+   ```json
+   {
+     "percentOff": 0.2
+   }
+   ```
+
+2. coupon
+
+   e.g.
+
+   ```json
+   {
+     "dollarsOff": 200.0
+   }
+   ```
+
+3. BOGO
+   e.g.
+
+   ```jsonc
+   {
+     "buy": 1, // buy 1
+     "get": 2 // get 1 for free
+   }
+   ```
