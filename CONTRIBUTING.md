@@ -55,7 +55,7 @@ FLASK_APP=service:app flask run --host=0.0.0.0
 | id          | int         | Primary Key                      |
 | product_id  | int         | nullable, `null` means universal |
 | name        | string (63) |                                  |
-| type        | string (63) | "percentage", "coupon", "BOGO"   |
+| type        | string (63) | "percentage", "coupon", "bogo"   |
 | description | text        | nullable                         |
 | meta        | json        | Promotion meta info              |
 | begin_date  | timestamp   |                                  |
@@ -70,7 +70,7 @@ For different promotion type, meta json is in different schema accordingly.
 
    ```json
    {
-     "value": 0.2
+     "percentOff": 0.2
    }
    ```
 
