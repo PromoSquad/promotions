@@ -35,7 +35,7 @@ The default port for Flask service is `5000`, which is already mapped to host by
 ### Start in dev mode
 
 ```bash
-FLASK_ENV=development flask run --host=0.0.0.0 --reload --debugger
+FLASK_APP=service FLASK_ENV=development flask run --host=0.0.0.0 --reload --debugger
 ```
 
 This is with auto-reloader and debugger on. `--reload` enables auto-reloader so that your changes to the code will be applied automatically.
@@ -43,5 +43,5 @@ This is with auto-reloader and debugger on. `--reload` enables auto-reloader so 
 ### Start in production mode
 
 ```bash
-flask run --host=0.0.0.0
+python ./main.py
 ```
