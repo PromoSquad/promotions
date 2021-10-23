@@ -89,7 +89,7 @@ class TestPromotionModel(unittest.TestCase):
         self.assertIn("name", data)
         self.assertEqual(data["name"], promotion.name)
         self.assertIn("type", data)
-        self.assertEqual(data["type"], str(promotion.type))
+        self.assertEqual(data["type"], promotion.type.value)
 
         self.assertIn("description", data)
         self.assertEqual(data["description"], promotion.description)
@@ -122,7 +122,7 @@ class TestPromotionModel(unittest.TestCase):
         self.assertEqual(promotion.id, None)
         self.assertEqual(promotion.product_id, 5)
         self.assertEqual(promotion.name, "amazing"),
-        self.assertEqual(str(promotion.type.value), "coupon"),
+        self.assertEqual(promotion.type.value, "coupon"),
         self.assertEqual(promotion.description, "this is amazing")
         self.assertEqual(promotion.meta, '{"dollarsOff": 10}')
         self.assertEqual(promotion.begin_date, datetime.strptime("18-Nov-2018 (08:34:58.674035)", datetimeFormat))

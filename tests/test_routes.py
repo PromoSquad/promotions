@@ -1,9 +1,11 @@
+from datetime import date
 import os
 import logging
 import unittest
 from service import status
-from service.models import db
+from service.models import Promotion, db, datetimeFormat
 from service.routes import app, init_db
+from .factories import PromotionFactory
 
 DATABASE_URI = os.getenv(
     "DATABASE_URI", "postgres://postgres:postgres@localhost:5432/postgres"
@@ -36,6 +38,21 @@ class TestPromotionServer(unittest.TestCase):
         db.session.remove()
         db.drop_all()
 
+    def _create_promotions(self, count):
+        promotions = []
+        for _ in range(count):
+            test_promotion = PromotionFactory()
+            resp = self.app.post(
+                BASE_URL, json=test_promotion.serialize(), content_type="application/json"
+            )
+            self.assertEqual(
+                resp.status_code, status.HTTP_201_CREATED, "Could not create test promotion"
+            )
+            new_promotion = resp.get_json()
+            test_promotion.id = new_promotion["id"]
+            promotions.append(test_promotion)
+        return promotions
+
     ######################################################################
     #  T E S T   C A S E S
     ######################################################################
@@ -45,3 +62,16 @@ class TestPromotionServer(unittest.TestCase):
         self.assertEqual(resp.status_code, status.HTTP_200_OK)
         data = resp.get_json()
         self.assertEqual(data["name"], "Promotion REST API Service")
+
+    # def test_get_promotion(self):
+    #     test_promotion = self._create_promotions(1)[0]
+    #     resp = self.app.get(
+    #         "{0}/{1}".format(BASE_URL, test_promotion.id), content_type="application/json"
+    #     )
+    #     self.assertEqual(resp.status_code, status.HTTP_200_OK)
+    #     data = resp.get_json()
+    #     self.assertEqual(data["name"], test_promotion.name)
+
+    def test_get_pet_not_found(self):
+        resp = self.app.get("{}/0".format(BASE_URL))
+        self.assertEqual(resp.status_code, status.HTTP_404_NOT_FOUND)
