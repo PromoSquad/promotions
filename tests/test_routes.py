@@ -63,15 +63,55 @@ class TestPromotionServer(unittest.TestCase):
         data = resp.get_json()
         self.assertEqual(data["name"], "Promotion REST API Service")
 
-    # def test_get_promotion(self):
-    #     test_promotion = self._create_promotions(1)[0]
-    #     resp = self.app.get(
-    #         "{0}/{1}".format(BASE_URL, test_promotion.id), content_type="application/json"
-    #     )
-    #     self.assertEqual(resp.status_code, status.HTTP_200_OK)
-    #     data = resp.get_json()
-    #     self.assertEqual(data["name"], test_promotion.name)
+    def test_get_promotion(self):
+        test_promotion = self._create_promotions(1)[0]
+        resp = self.app.get(
+            "{0}/{1}".format(BASE_URL, test_promotion.id), content_type="application/json"
+        )
+        self.assertEqual(resp.status_code, status.HTTP_200_OK)
+        data = resp.get_json()
+        self.assertEqual(data["name"], test_promotion.name)
 
     def test_get_pet_not_found(self):
         resp = self.app.get("{}/0".format(BASE_URL))
         self.assertEqual(resp.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_create_promotion(self):
+        test_promotion = PromotionFactory()
+        logging.debug(test_promotion)
+        resp = self.app.post(
+            BASE_URL, json=test_promotion.serialize(), content_type="application/json"
+        )
+        self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
+        location = resp.headers.get("Location", None)
+        self.assertIsNotNone(location)
+        new_promotion = resp.get_json()
+        self.assertEqual(new_promotion["product_id"], test_promotion.product_id)
+        self.assertEqual(new_promotion["name"], test_promotion.name)
+        self.assertEqual(new_promotion["type"], test_promotion.type.value)
+        self.assertEqual(new_promotion["description"], test_promotion.description)
+        self.assertEqual(new_promotion["meta"], test_promotion.meta)
+        self.assertEqual(new_promotion["begin_date"], test_promotion.begin_date.strftime(datetimeFormat))
+        if "end_date" in new_promotion and new_promotion["end_date"] != None:
+            self.assertEqual(new_promotion["end_date"], test_promotion.begin_date.strftime(datetimeFormat))
+        self.assertEqual(new_promotion["active"], test_promotion.active)
+        resp = self.app.get(location, content_type="application/json")
+        self.assertEqual(resp.status_code, status.HTTP_200_OK)
+        new_promotion = resp.get_json()
+        self.assertEqual(new_promotion["product_id"], test_promotion.product_id)
+        self.assertEqual(new_promotion["name"], test_promotion.name)
+        self.assertEqual(new_promotion["type"], test_promotion.type.value)
+        self.assertEqual(new_promotion["description"], test_promotion.description)
+        self.assertEqual(new_promotion["meta"], test_promotion.meta)
+        self.assertEqual(new_promotion["begin_date"], test_promotion.begin_date.strftime(datetimeFormat))
+        if "end_date" in new_promotion and new_promotion["end_date"] != None:
+            self.assertEqual(new_promotion["end_date"], test_promotion.begin_date.strftime(datetimeFormat))
+        self.assertEqual(new_promotion["active"], test_promotion.active)
+
+    def test_create_promotion_with_wrong_content_type(self):
+        test_promotion = PromotionFactory()
+        logging.debug(test_promotion)
+        resp = self.app.post(
+            BASE_URL, json=test_promotion.serialize(), content_type="application/text"
+        )
+        self.assertEqual(resp.status_code, status.HTTP_415_UNSUPPORTED_MEDIA_TYPE)
