@@ -85,6 +85,17 @@ Vagrant.configure(2) do |config|
 
     # Need PostgreSQL development library to compile on arm64
     apt-get install -y libpq-dev
+
+    # Install Flask # youngil 
+    # pip install flask
+
+    # Install apache2 # youngil
+    apt-get install -y apache2 # youngil
+
+    # Link HTMP Folder # youngil
+    # rm -rf /var/www/html # youngil
+    # ln -s /vagrant/html /var/www/html # youngil
+
     # Create a Python3 Virtual Environment and Activate it in .profile
     sudo -H -u vagrant sh -c 'python3 -m venv ~/venv'
     sudo -H -u vagrant sh -c 'echo ". ~/venv/bin/activate" >> ~/.profile'
@@ -103,5 +114,12 @@ Vagrant.configure(2) do |config|
     d.run "postgres:alpine",
        args: "-d --name postgres -p 5432:5432 -v psqldata:/var/lib/postgresql/data -e POSTGRES_PASSWORD=postgres"
   end
+
+  ######################################################################
+  # Set the Environment Variables for the App
+  ######################################################################
+  config.vm.provision "shell", inline: <<-SHELL
+    export FLASK_APP=service:app
+  SHELL
 
 end

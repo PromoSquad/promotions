@@ -1,9 +1,23 @@
+"""
+Promotion Service
+Paths:
+------
+GET /promotions - Returns a list all of the promotions
+GET /promotions/{id} - Returns the promotion with a given id number
+POST /promotions - creates a new promotion record in the database
+PUT /promotions/{id} - updates a promotion record in the database
+DELETE /promotions/{id} - deletes a promotion record in the database
+"""
+
+from os import system
 from flask.signals import message_flashed
 from werkzeug.exceptions import NotFound
 from . import app
 from .models import Promotion
 from flask import Flask, jsonify, request, url_for, make_response, abort
 from . import status
+
+app = Flask(__name__)
 
 @app.route('/')
 def index():
@@ -35,6 +49,10 @@ def create_promotions():
     return make_response(
         jsonify(message), status.HTTP_201_CREATED, {"location": location_url}
     )
+
+######################################################################
+#  U T I L I T Y   F U N C T I O N S
+######################################################################
 
 def init_db():
     """ Initialize the SQLAlchemy app """

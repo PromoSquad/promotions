@@ -4,6 +4,7 @@ Werkzeug==1.0.1
 # Runtime dependencies
 Flask==1.1.1
 SQLAlchemy==1.3.23
+Flask-Log-Request-ID==0.10.1 # youngil
 Flask-SQLAlchemy==2.4.4
 psycopg2-binary==2.8.6
 python-dotenv==0.10.3
@@ -16,3 +17,11 @@ pinocchio==0.4.2
 factory-boy==2.12.0
 coverage==4.5.4
 pylint>=2.8.3
+
+# Code quality
+pylint==2.9.3 # youngil
+flake8==3.7.9 # youngil
+
+# Code coverage
+coverage==4.5.4 # youngil
+codecov==2.1.10 # youngil
