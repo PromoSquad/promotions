@@ -95,6 +95,7 @@ For different promotion type, meta json is in different schema accordingly:
    ```
 
 3. BOGO
+
    e.g.
 
    ```jsonc
