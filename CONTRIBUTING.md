@@ -58,6 +58,8 @@ nosetests
 
 ## Model
 
+> The implementation is at file [models.py](./service/models.py).
+
 ### Model: Promotion
 
 | Column      | Type        | Remark                           |
