@@ -57,7 +57,7 @@ class Promotion(db.Model):
       "id": self.id,
       "product_id": self.product_id,
       "name": self.name,
-      "type": str(self.type),
+      "type": self.type.value,
       "description": self.description,
       "meta": self.meta,
       "begin_date": self.begin_date.strftime(datetimeFormat),
