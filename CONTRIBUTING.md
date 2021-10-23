@@ -1,5 +1,7 @@
 # Contributing
 
+Promo Squad members, please refer to this guide for setting up development environment and also getting to know the model specifications.
+
 ## Vagrant
 
 Vagrant is the VM development environment we're using in this class to develope our Flask services.
@@ -46,6 +48,14 @@ This is with auto-reloader and debugger on. `--reload` enables auto-reloader so 
 FLASK_APP=service:app flask run --host=0.0.0.0
 ```
 
+### Run tests
+
+Tests are written and put under folder `tests`. We use `nosetests` to run these tests and report coverages:
+
+```bash
+nosetests
+```
+
 ## Model
 
 ### Model: Promotion
@@ -62,7 +72,7 @@ FLASK_APP=service:app flask run --host=0.0.0.0
 | end_date    | timestamp   | nullable                         |
 | active      | boolean     |                                  |
 
-For different promotion type, meta json is in different schema accordingly.
+For different promotion type, meta json is in different schema accordingly:
 
 1. Percentage
 
@@ -70,7 +80,7 @@ For different promotion type, meta json is in different schema accordingly.
 
    ```json
    {
-     "percentOff": 0.2
+     "percentOff": 0.2 // 20% off discount
    }
    ```
 
@@ -80,7 +90,7 @@ For different promotion type, meta json is in different schema accordingly.
 
    ```json
    {
-     "dollarsOff": 200.0
+     "dollarsOff": 200.0 // 200 dollars off coupon
    }
    ```
 
