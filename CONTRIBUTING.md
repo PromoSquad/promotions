@@ -78,7 +78,7 @@ For different promotion type, meta json is in different schema accordingly:
 
    e.g.
 
-   ```json
+   ```jsonc
    {
      "percentOff": 0.2 // 20% off discount
    }
@@ -88,7 +88,7 @@ For different promotion type, meta json is in different schema accordingly:
 
    e.g.
 
-   ```json
+   ```jsonc
    {
      "dollarsOff": 200.0 // 200 dollars off coupon
    }
