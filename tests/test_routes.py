@@ -115,3 +115,17 @@ class TestPromotionServer(unittest.TestCase):
             BASE_URL, json=test_promotion.serialize(), content_type="application/text"
         )
         self.assertEqual(resp.status_code, status.HTTP_415_UNSUPPORTED_MEDIA_TYPE)
+
+    def test_create_promotion_with_no_data(self):
+        resp = self.app.post(
+            BASE_URL, json={}, content_type="application/json"
+        )
+        self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_create_promotion_with_wrong_method(self):
+        test_promotion = PromotionFactory()
+        logging.debug(test_promotion)
+        resp = self.app.put(
+            BASE_URL, json=test_promotion.serialize(), content_type="application/json"
+        )
+        self.assertEqual(resp.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
