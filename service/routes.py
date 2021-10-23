@@ -23,6 +23,19 @@ def get_promotions(id):
         raise NotFound("Promotion with id '{}' was not found.".format(id))
     return make_response(jsonify(promotion.serialize()), status.HTTP_200_OK)
 
+@app.route('/promotions', methods=["POST"])
+def create_promotions():
+    app.logger.info("Request to create a promotion")
+    check_content_type("application/json")
+    promotion = Promotion()
+    promotion.deserialize(request.get_json())
+    promotion.create()
+    message = promotion.serialize()
+    location_url = url_for("get_promotions", id=promotion.id, _external=True)
+    return make_response(
+        jsonify(message), status.HTTP_201_CREATED, {"location": location_url}
+    )
+
 def init_db():
     """ Initialize the SQLAlchemy app """
     global app
