@@ -36,6 +36,22 @@ def create_promotions():
         jsonify(message), status.HTTP_201_CREATED, {"location": location_url}
     )
 
+######################################################################
+# DELETE A PROMOTION
+######################################################################
+@app.route("/promotions/<int:id>", methods=["DELETE"])
+def delete_promotions(id):
+    """
+    Delete a Promotioon
+    This endpoint will delete a Promotion based the id specified in the path
+    """
+    app.logger.info("Request to delete promotion with id: %s", id)
+    promotion = Promotion.find(id)
+    if promotion:
+        promotion.delete()
+    return make_response("", status.HTTP_204_NO_CONTENT)
+
+
 def init_db():
     """ Initialize the SQLAlchemy app """
     global app

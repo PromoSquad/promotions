@@ -71,7 +71,7 @@ class TestPromotionServer(unittest.TestCase):
         data = resp.get_json()
         self.assertEqual(data["name"], test_promotion.name)
 
-    def test_get_pet_not_found(self):
+    def test_get_promotion_not_found(self):
         resp = self.app.get("{}/0".format(BASE_URL))
         self.assertEqual(resp.status_code, status.HTTP_404_NOT_FOUND)
 
@@ -128,3 +128,18 @@ class TestPromotionServer(unittest.TestCase):
             BASE_URL, json=test_promotion.serialize(), content_type="application/json"
         )
         self.assertEqual(resp.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
+
+
+    def test_delete_promotion(self):
+        """ Delete a Promotion """
+        test_promotion = self._create_promotions(1)[0]
+        resp = self.app.delete(
+            "{0}/{1}".format(BASE_URL, test_promotion.id), content_type="application/json"
+        )
+        self.assertEqual(resp.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertEqual(len(resp.data), 0)
+        # make sure they are deleted
+        resp = self.app.get(
+            "{}/{}".format(BASE_URL, test_promotion.id), content_type="application/json"
+        )
+        self.assertEqual(resp.status_code, status.HTTP_404_NOT_FOUND)
