@@ -144,6 +144,14 @@ class TestPromotionServer(unittest.TestCase):
         )
         self.assertEqual(resp.status_code, status.HTTP_404_NOT_FOUND)
 
+    def test_get_promotion_list(self):
+        """ Get a list of Promotions """
+        self._create_promotions(5)
+        resp = self.app.get(BASE_URL)
+        self.assertEqual(resp.status_code, status.HTTP_200_OK)
+        data = resp.get_json()
+        self.assertEqual(len(data), 5)
+
     def test_update_promotion(self):
         """ Update an existing Promotion """
         # create a promotion to update
