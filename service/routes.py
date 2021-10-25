@@ -37,6 +37,19 @@ def create_promotions():
     )
 
 ######################################################################
+# LIST ALL PROMOTIONS
+######################################################################
+@app.route("/promotions", methods=["GET"])
+def list_promotions():
+    """ Returns all of the Promotions """
+    app.logger.info("Request for promotion list")
+    promotions = []
+    promotions = Promotion.all()
+
+    results = [promotion.serialize() for promotion in promotions]
+    return make_response(jsonify(results), status.HTTP_200_OK)
+
+######################################################################
 # DELETE A PROMOTION
 ######################################################################
 @app.route("/promotions/<int:id>", methods=["DELETE"])
