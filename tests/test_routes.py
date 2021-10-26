@@ -174,3 +174,18 @@ class TestPromotionServer(unittest.TestCase):
             json=test_promotion.serialize(),
             content_type="application/json")
         self.assertEqual(resp.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_query_promotions_by_productID(self):
+        """ find the promotions by product ID """
+        promotions = self._create_promotions(10)
+        test_productID = promotions[0].productID
+        productID_promotions = [promotion for promotion in promotions if promotion.productID == test_productID]
+        resp = self.app.get(
+            BASE_URL, query_string="productID={}".format(quote_plus(test_productID))
+        )
+        self.assertEqual(resp.status_code, status.HTTP_200_OK)
+        data = resp.get_json()
+        self.assertEqual(len(data), len(productID_promotions))
+        # check the data just to be sure
+        for promotion in data:
+            self.assertEqual(promotion["productID"], test_productID)
