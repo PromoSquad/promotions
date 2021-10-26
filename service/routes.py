@@ -94,6 +94,3 @@ def check_content_type(content_type):
         return
     app.logger.error("Invalid Content-Type: [%s]", request.headers.get("Content-Type"))
     abort(status.HTTP_415_UNSUPPORTED_MEDIA_TYPE, "Content-Type must be {}".format(content_type))
-
-
-
