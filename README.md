@@ -46,50 +46,34 @@ Then all you have to do is clone this repo and invoke vagrant:
     FLASK_APP=service:app flask run -h 0.0.0.0
 ```
 
-## Alternate install using VSCode and Docker
+Running the App
+Clone the project folder
+"vagrant up" at the project folder root
+"vagrant ssh" to ssh into the VM
+"cd /vagrant/" to change directory to project folder root within the VM
+"export FLASK_APP=service:app" to set the environment variable to run flask app
+"flask run -h 0.0.0.0" to run the application
+On host machine, visist: http://127.0.0.1:5000/
+"nosetests" to run the tests
+"coverage report -m" to see test coverage
 
-You can also develop in Docker containers using VSCode. This project contains a `.devcontainer` folder that will set up a Docker environment in VSCode for you. You will need the following:
+## Setup
 
-- Docker Desktop for [Mac](https://docs.docker.com/docker-for-mac/install/) or [Windows](https://docs.docker.com/docker-for-windows/install/)
-- Microsoft Visual Studio Code ([VSCode](https://code.visualstudio.com/download))
-- [Remote Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) VSCode Extension
+### Prerequisite Installation using Vagrant
+The easiest way to use this is with Vagrant and VirtualBox. If you don't have this software the first step is download and install it. If you have an 2020 Apple Mac with the M1 chip, you should download Docker Desktop instead of VirtualBox. Here is what you need:
+Download: Vagrant
+Intel Download: VirtualBox
+Apple M1 Download: Apple M1 Tech Preview
+Install each of those. Then all you have to do is clone this repo and invoke vagrant:
 
-It is a good idea to add VSCode to your path so that you can invoke it from the command line. To do this, open VSCode and type `Shift+Command+P` on Mac or `Shift+Ctrl+P` on Windows to open the command palete and then search for "shell" and select the option **Shell Command: Install 'code' command in Path**. This will install VSCode in your path.
-
-Then you can start your development environment up with:
-
+### Using Vagrant and VirtualBox
 ```bash
-    git clone https://github.com/nyu-devops/lab-flask-rest.git
-    cd lab-flask-rest
-    code .
+Git clone https://github.com/DevOpsS21-Promotions/promotions.git
+cd promotions
+vagrant up
 ```
-
-The first time it will build the Docker image but after that it will just create a container and place you inside of it in your `/workspace` folder which actually contains the repo shared from your computer. It will also install all of the VSCode extensions needed for Python development.
-
-If it does not automatically pronot you to open the project in a container, you can select the green icon at the bottom left of your VSCode UI and select: **Remote Containers: Reopen in Container**.
-
-## Manually running the Tests
-
-Run the tests using `nosetests`
-
+You can now ssh into the virtual machine and run the service and the test suite:
 ```bash
-  $ nosetests --with-spec --spec-color
+vagrant ssh
+cd /vagrant
 ```
-
-**Notes:** the parameter flags `--with-spec --spec-color` add color so that red-green-refactor is meaningful. If you are in a command shell that supports colors, passing tests will be green while failing tests will be red. The flag `--with-coverage` is automatcially specified in the `setup.cfg` file so that code coverage is included in the tests.
-
-The Code Coverage tool runs with `nosetests` so to see how well your test cases exercise your code just run the report:
-
-```bash
-  $ coverage report -m
-```
-
-This is particularly useful because it reports the line numbers for the code that is not covered so that you can write more test cases.
-
-To run the service use `flask run` (Press Ctrl+C to exit):
-
-```bash
-  $ FLASK_APP=service:app flask run -h 0.0.0.0
-```
-
-You must pass the parameters `-h 0.0.0.0` to have it listed on all network adapters to that the post can be forwarded by `vagrant` to your host computer so that you can open the web page in a local browser at: http://localhost:5000
