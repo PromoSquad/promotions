@@ -2,21 +2,6 @@
 
 Project Promotions repo for NYU DevOps Fall 2021
 
-## Vagrant shutdown
-
-If you are using Vagrant and VirtualBox, when you are done, you should exit the virtual machine and shut down the vm with:
-
-```bash
- $ exit
- $ vagrant halt
-```
-
-If the VM is no longer needed you can remove it with:
-
-```bash
-  $ vagrant destroy
-```
-
 This repo is part of the DevOps course CSCI-GA.2820-001/002 at NYU taught by John Rofrano.
 
 ## Introduction
@@ -76,4 +61,19 @@ You can now ssh into the virtual machine and run the service and the test suite:
 ```bash
 vagrant ssh
 cd /vagrant
+```
+
+## Vagrant shutdown
+
+If you are using Vagrant and VirtualBox, when you are done, you should exit the virtual machine and shut down the vm with:
+
+```bash
+ $ exit
+ $ vagrant halt
+```
+
+If the VM is no longer needed you can remove it with:
+
+```bash
+  $ vagrant destroy
 ```
