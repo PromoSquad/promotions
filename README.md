@@ -12,36 +12,6 @@ promotion.
 The project is still in process. Keeping adding information and new functions
 about the promotion API.
 
-## Prerequisite Installation for Intel Mac & PC
-
-The easiest way to use this lab is with **Vagrant** and **VirtualBox**. if you don't have this software the first step is down download and install it.
-
-Download [VirtualBox](https://www.virtualbox.org/)
-
-Download [Vagrant](https://www.vagrantup.com/)
-
-Then all you have to do is clone this repo and invoke vagrant:
-
-```bash
-    git clone https://github.com/nyu-devops/lab-flask-rest.git
-    cd lab-flask-rest
-    vagrant up
-    vagrant ssh
-    cd /vagrant
-    FLASK_APP=service:app flask run -h 0.0.0.0
-```
-
-Running the App
-Clone the project folder
-"vagrant up" at the project folder root
-"vagrant ssh" to ssh into the VM
-"cd /vagrant/" to change directory to project folder root within the VM
-"export FLASK_APP=service:app" to set the environment variable to run flask app
-"flask run -h 0.0.0.0" to run the application
-On host machine, visist: http://127.0.0.1:5000/
-"nosetests" to run the tests
-"coverage report -m" to see test coverage
-
 ## Setup
 
 ### Prerequisite Installation using Vagrant
