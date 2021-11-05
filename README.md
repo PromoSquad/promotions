@@ -1,3 +1,5 @@
+[![Build Status](https://app.travis-ci.com/PromoSquad/promotions.svg?branch=main)](https://app.travis-ci.com/PromoSquad/promotions)
+
 # promotions
 
 Project Promotions repo for NYU DevOps Fall 2021. A microservice that manages promotion information, leveraging technologies including Flask(Python), PostgreSQL, Travis CI and IBM Cloud.
