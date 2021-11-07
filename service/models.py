@@ -145,6 +145,5 @@ class Promotion(db.Model):
     Args:
         product_id (int): the product_id of the Promotions you want to match """
     logger.info("Processing product_id query for %s ...", productId)
-    # return cls.query.filter(cls.product_id == product_id)
     return cls.query.filter_by(product_id=productId).all()
 

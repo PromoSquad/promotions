@@ -244,7 +244,7 @@ class TestPromotionModel(unittest.TestCase):
             "active": False
         }
         data3 = {
-            "product_id": 3,
+            "product_id": 2,
             "name": "amazing3",
             "type": "percentage",
             "description": "this is amazing3",
@@ -262,5 +262,7 @@ class TestPromotionModel(unittest.TestCase):
         self.assertEqual(len(promotions), 2)
         self.assertEqual(promotions[0].id, promotion1.id)
         self.assertEqual(promotions[1].id, promotion2.id)
-        promotions = Promotion.find_by_productId(3)
+        promotions = Promotion.find_by_productId(2)
         self.assertEqual(len(promotions), 1)
+
+
