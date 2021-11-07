@@ -140,6 +140,14 @@ class Promotion(db.Model):
     return cls.query.get(id)
 
   @classmethod
-  def find_by_status(cls, active: bool):
-    logger.info("Processing lookup for status %s ...", "active" if active else "inactive")
-    return cls.query.filter_by(active=active).all()
+  def find_by_productId(cls, productId: int):
+    """Returns all Promotions with the given product_id
+    Args:
+        product_id (int): the product_id of the Promotions you want to match """
+    logger.info("Processing product_id query for %s ...", productId)
+    return cls.query.filter_by(product_id=productId).all()
+
+  @classmethod
+  def find_by_status(cls, status: bool):
+    logger.info("Processing lookup for status %s ...", status)
+    return cls.query.filter_by(active=status).all()
