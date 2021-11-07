@@ -44,7 +44,11 @@ def list_promotions():
     """ Returns all of the Promotions """
     app.logger.info("Request for promotion list")
     promotions = []
-    promotions = Promotion.all()
+    query_status = request.args.get("status")
+    if query_status:
+        promotions = Promotion.find_by_status(query_status.lower()=="active")
+    else:
+        promotions = Promotion.all()
 
     results = [promotion.serialize() for promotion in promotions]
     return make_response(jsonify(results), status.HTTP_200_OK)
