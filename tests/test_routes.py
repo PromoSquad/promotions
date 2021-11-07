@@ -39,8 +39,10 @@ class TestPromotionServer(unittest.TestCase):
 
     def _create_promotions(self, count):
         promotions = []
-        for _ in range(count):
+        for i in range(count):
             test_promotion = PromotionFactory()
+            if i == 0:
+                test_promotion.product_id = 1
             resp = self.app.post(
                 BASE_URL, json=test_promotion.serialize(), content_type="application/json"
             )
@@ -81,6 +83,19 @@ class TestPromotionServer(unittest.TestCase):
         self.assertEqual(len(data), len(active_promotions))
         for promotion in data:
             self.assertEqual(promotion["active"], True)
+
+    def test_query_promotion_list_by_productId(self):
+        promotions = self._create_promotions(20)
+        test_productId = promotions[0].product_id
+        productId_promotions = [p for p in promotions if p.product_id == test_productId]
+        resp = self.app.get(
+            BASE_URL, query_string="productId={}".format(str(test_productId))
+        )
+        self.assertEqual(resp.status_code, status.HTTP_200_OK)
+        data = resp.get_json()
+        self.assertEqual(len(data), len(productId_promotions))
+        for promotion in data:
+            self.assertEqual(promotion["product_id"], test_productId)
 
     def test_get_promotion(self):
         test_promotion = self._create_promotions(1)[0]

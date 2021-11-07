@@ -21,6 +21,7 @@ class PromotionFactory(factory.Factory):
     model = Promotion
   id = factory.Sequence(lambda n : n)
   name = factory.Faker("catch_phrase")
+  product_id = FuzzyChoice(choices=[None, 1, 2 ,3 , 4 ,5])
   type = FuzzyChoice(choices=[PromotionType.Percentage, PromotionType.Coupon, PromotionType.BOGO])
   description = factory.Faker("text")
   meta = LazyAttribute(generate_meta)

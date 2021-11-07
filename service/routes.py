@@ -45,8 +45,11 @@ def list_promotions():
     app.logger.info("Request for promotion list")
     promotions = []
     query_status = request.args.get("status")
+    query_productId = request.args.get("productId")
     if query_status:
         promotions = Promotion.find_by_status(query_status.lower()=="active")
+    elif query_productId:
+        promotions = Promotion.find_by_productId(query_productId)
     else:
         promotions = Promotion.all()
 
