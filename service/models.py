@@ -147,3 +147,7 @@ class Promotion(db.Model):
     logger.info("Processing product_id query for %s ...", productId)
     return cls.query.filter_by(product_id=productId).all()
 
+  def find_by_status(cls, status: bool):
+    logger.info("Processing lookup for status %s ...", status)
+    return cls.query.filter_by(active=status).all()
+
