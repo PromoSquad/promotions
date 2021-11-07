@@ -1,4 +1,5 @@
 [![Build Status](https://app.travis-ci.com/PromoSquad/promotions.svg?branch=main)](https://app.travis-ci.com/PromoSquad/promotions)
+[![codecov](https://codecov.io/gh/PromoSquad/promotions/branch/main/graph/badge.svg?token=C8GU9IMZBE)](https://codecov.io/gh/PromoSquad/promotions)
 
 # promotions
 
