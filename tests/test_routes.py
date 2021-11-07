@@ -62,6 +62,26 @@ class TestPromotionServer(unittest.TestCase):
         data = resp.get_json()
         self.assertEqual(data["name"], "Promotion REST API Service")
 
+    def test_get_promotion_list(self):
+        """ Get a list of Promotions """
+        self._create_promotions(5)
+        resp = self.app.get(BASE_URL)
+        self.assertEqual(resp.status_code, status.HTTP_200_OK)
+        data = resp.get_json()
+        self.assertEqual(len(data), 5)
+
+    def test_query_promotion_list_by_status(self):
+        promotions = self._create_promotions(10)
+        active_promotions = [p for p in promotions if p.active]
+        resp = self.app.get(
+            BASE_URL, query_string="status=active"
+        )
+        self.assertEqual(resp.status_code, status.HTTP_200_OK)
+        data = resp.get_json()
+        self.assertEqual(len(data), len(active_promotions))
+        for promotion in data:
+            self.assertEqual(promotion["active"], True)
+
     def test_get_promotion(self):
         test_promotion = self._create_promotions(1)[0]
         resp = self.app.get(
@@ -143,14 +163,6 @@ class TestPromotionServer(unittest.TestCase):
             "{}/{}".format(BASE_URL, test_promotion.id), content_type="application/json"
         )
         self.assertEqual(resp.status_code, status.HTTP_404_NOT_FOUND)
-
-    def test_get_promotion_list(self):
-        """ Get a list of Promotions """
-        self._create_promotions(5)
-        resp = self.app.get(BASE_URL)
-        self.assertEqual(resp.status_code, status.HTTP_200_OK)
-        data = resp.get_json()
-        self.assertEqual(len(data), 5)
 
     def test_update_promotion(self):
         """ Update an existing Promotion """

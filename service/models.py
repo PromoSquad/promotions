@@ -140,6 +140,6 @@ class Promotion(db.Model):
     return cls.query.get(id)
 
   @classmethod
-  def find_by_status(cls, status: bool):
-    logger.info("Processing lookup for status %s ...", status)
-    return cls.query.filter_by(active=status).all()
+  def find_by_status(cls, active: bool):
+    logger.info("Processing lookup for status %s ...", "active" if active else "inactive")
+    return cls.query.filter_by(active=active).all()
