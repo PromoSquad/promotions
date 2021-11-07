@@ -202,27 +202,6 @@ class TestPromotionModel(unittest.TestCase):
         self.assertEqual(promotion.name, promotions[1].name)
         self.assertEqual(promotion.active, promotions[1].active)
 
-    # def test_find_by_productId(self):
-    #     # """ Find Promotions by ProductID """
-    #     promotions = PromotionFactory.create_batch(3)
-    #     for promotion in promotions:
-    #         promotion.create()
-    #     logging.debug(promotions)
-    #     self.assertEqual(len(Promotion.all()), 3)
-    #     promotion = Promotion.find_by_productId(promotions[1].product_id)
-    #     self.assertIsNot(promotion, None)
-    #     self.assertEqual(promotion.product_id, promotions[1].product_id)
-    #     self.assertEqual(promotion.name, promotions[1].name)
-    #     self.assertEqual(promotion.active, promotions[1].active)
-
-
-        # Promotion(name="benefit", product_id=23, active=True).create()
-        # Promotion(name="bigDiscount", product_id=25, active=False).create()
-        # promotions = Promotion.find_by_productId(25)
-        # self.assertEqual(promotions[0].product_id, 25)
-        # self.assertEqual(promotions[0].name, "bigDiscount")
-        # self.assertEqual(promotions[0].active, False)
-
     def test_find_by_productID(self):
         data1 = {
             "product_id": 5,
