@@ -138,3 +138,13 @@ class Promotion(db.Model):
   def find(cls, id: int):
     logger.info("Processing lookup for id %s ...", id)
     return cls.query.get(id)
+
+  @classmethod
+  def find_by_productId(cls, productId: int):
+    """Returns all Promotions with the given product_id
+    Args:
+        product_id (int): the product_id of the Promotions you want to match """
+    logger.info("Processing product_id query for %s ...", productId)
+    # return cls.query.filter(cls.product_id == product_id)
+    return cls.query.filter_by(product_id=productId).all()
+

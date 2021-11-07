@@ -201,3 +201,66 @@ class TestPromotionModel(unittest.TestCase):
         self.assertEqual(promotion.id, promotions[1].id)
         self.assertEqual(promotion.name, promotions[1].name)
         self.assertEqual(promotion.active, promotions[1].active)
+
+    # def test_find_by_productId(self):
+    #     # """ Find Promotions by ProductID """
+    #     promotions = PromotionFactory.create_batch(3)
+    #     for promotion in promotions:
+    #         promotion.create()
+    #     logging.debug(promotions)
+    #     self.assertEqual(len(Promotion.all()), 3)
+    #     promotion = Promotion.find_by_productId(promotions[1].product_id)
+    #     self.assertIsNot(promotion, None)
+    #     self.assertEqual(promotion.product_id, promotions[1].product_id)
+    #     self.assertEqual(promotion.name, promotions[1].name)
+    #     self.assertEqual(promotion.active, promotions[1].active)
+
+
+        # Promotion(name="benefit", product_id=23, active=True).create()
+        # Promotion(name="bigDiscount", product_id=25, active=False).create()
+        # promotions = Promotion.find_by_productId(25)
+        # self.assertEqual(promotions[0].product_id, 25)
+        # self.assertEqual(promotions[0].name, "bigDiscount")
+        # self.assertEqual(promotions[0].active, False)
+
+    def test_find_by_productID(self):
+        data1 = {
+            "product_id": 5,
+            "name": "amazing",
+            "type": "coupon",
+            "description": "this is amazing",
+            "meta": '{"dollarsOff": 10}',
+            "begin_date": "18-Nov-2018 (08:34:58.674035)",
+            "end_date": "30-Dec-2021 (18:59:32.102939)",
+            "active": True
+        }
+        data2 = {
+            "product_id": 5,
+            "name": "amazing2",
+            "type": "coupon",
+            "description": "this is amazing2",
+            "meta": '{"dollarsOff": 20}',
+            "begin_date": "18-Nov-2018 (08:34:58.674035)",
+            "active": False
+        }
+        data3 = {
+            "product_id": 3,
+            "name": "amazing3",
+            "type": "percentage",
+            "description": "this is amazing3",
+            "meta": '{"percentOff": 0.2}',
+            "begin_date": "18-Nov-2019 (08:34:58.674035)",
+            "active": True
+        }
+        promotion1 = Promotion()
+        promotion1.deserialize(data1).create()
+        promotion2 = Promotion()
+        promotion2.deserialize(data2).create()
+        promotion3 = Promotion()
+        promotion3.deserialize(data3).create()
+        promotions = Promotion.find_by_productId(5)
+        self.assertEqual(len(promotions), 2)
+        self.assertEqual(promotions[0].id, promotion1.id)
+        self.assertEqual(promotions[1].id, promotion2.id)
+        promotions = Promotion.find_by_productId(3)
+        self.assertEqual(len(promotions), 1)
