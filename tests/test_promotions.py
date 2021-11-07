@@ -245,7 +245,7 @@ class TestPromotionModel(unittest.TestCase):
         self.assertEqual(len(promotions), 1)
         
         
-   def test_find_by_productID(self):
+    def test_find_by_productID(self):
         data1 = {
             "product_id": 5,
             "name": "amazing",
