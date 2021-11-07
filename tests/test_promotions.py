@@ -201,3 +201,43 @@ class TestPromotionModel(unittest.TestCase):
         self.assertEqual(promotion.id, promotions[1].id)
         self.assertEqual(promotion.name, promotions[1].name)
         self.assertEqual(promotion.active, promotions[1].active)
+
+    def test_find_by_status(self):
+        data1 = {
+            "product_id": 5,
+            "name": "amazing",
+            "type": "coupon",
+            "description": "this is amazing",
+            "meta": '{"dollarsOff": 10}',
+            "begin_date": "18-Nov-2018 (08:34:58.674035)",
+            "end_date": "30-Dec-2021 (18:59:32.102939)",
+            "active": True
+        }
+        data2 = {
+            "name": "amazing2",
+            "type": "coupon",
+            "description": "this is amazing2",
+            "meta": '{"dollarsOff": 20}',
+            "begin_date": "18-Nov-2018 (08:34:58.674035)",
+            "active": False
+        }
+        data3 = {
+            "name": "amazing3",
+            "type": "percentage",
+            "description": "this is amazing3",
+            "meta": '{"percentOff": 0.2}',
+            "begin_date": "18-Nov-2019 (08:34:58.674035)",
+            "active": True
+        }
+        promotion1 = Promotion()
+        promotion1.deserialize(data1).create()
+        promotion2 = Promotion()
+        promotion2.deserialize(data2).create()
+        promotion3 = Promotion()
+        promotion3.deserialize(data3).create()
+        promotions = Promotion.find_by_status(True)
+        self.assertEqual(len(promotions), 2)
+        self.assertEqual(promotions[0].id, promotion1.id)
+        self.assertEqual(promotions[1].id, promotion3.id)
+        promotions = Promotion.find_by_status(False)
+        self.assertEqual(len(promotions), 1)
