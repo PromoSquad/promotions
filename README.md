@@ -80,7 +80,7 @@ Example Request:
 Example Response:
 
 ```jsonc
-// Location: http://localhost:5000/promotions/1
+// Location: http://localhost:8080/promotions/1
 {
   "id": 1,
   "product_id": 4,
