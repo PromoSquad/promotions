@@ -32,12 +32,12 @@ vagrant destroy
 
 ## App
 
-The default port for Flask service is `5000`, which is already mapped to host by our vagrant configuration. After starting the server, visit http://localhost:5000/ on your host.
+The port for our Flask service is `8080`, which is already mapped to host by our vagrant configuration. After starting the server, visit http://localhost:8080/ on your host.
 
 ### Start in dev mode
 
 ```bash
-FLASK_ENV=development FLASK_APP=service:app flask run --host=0.0.0.0 --reload --debugger
+FLASK_ENV=development FLASK_APP=service:app flask run --host=0.0.0.0 --port=8080 --reload --debugger
 ```
 
 This is with auto-reloader and debugger on. `--reload` enables auto-reloader so that your changes to the code will be applied automatically.
@@ -45,7 +45,7 @@ This is with auto-reloader and debugger on. `--reload` enables auto-reloader so 
 ### Start in production mode
 
 ```bash
-FLASK_APP=service:app flask run --host=0.0.0.0
+FLASK_APP=service:app flask run --host=0.0.0.0 --port=8080
 ```
 
 ### Run tests

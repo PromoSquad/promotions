@@ -1,4 +1,4 @@
-[![Build Status](https://app.travis-ci.com/PromoSquad/promotions.svg?branch=main)](https://app.travis-ci.com/PromoSquad/promotions)
+[![Run Python Tests](https://github.com/PromoSquad/promotions/actions/workflows/test.yml/badge.svg)](https://github.com/PromoSquad/promotions/actions/workflows/test.yml)
 [![codecov](https://codecov.io/gh/PromoSquad/promotions/branch/main/graph/badge.svg?token=C8GU9IMZBE)](https://codecov.io/gh/PromoSquad/promotions)
 
 # promotions
@@ -80,7 +80,7 @@ Example Request:
 Example Response:
 
 ```jsonc
-// Location: http://localhost:5000/promotions/1
+// Location: http://localhost:8080/promotions/1
 {
   "id": 1,
   "product_id": 4,
