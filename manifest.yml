@@ -3,10 +3,10 @@
 applications:
 - name: nyu-promotion-service-fall2103
   path: .
-  instances: 2
+  instances: 1
   memory: 64M
   routes:
-  - route: https://nyu-promotion-service-fall2103.us-south.cf.appdomain.cloud
+  - route: nyu-promotion-service-fall2103.us-south.cf.appdomain.cloud
   disk_quota: 1024M
   buildpacks:
   - python_buildpack

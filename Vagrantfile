@@ -14,12 +14,12 @@ Vagrant.configure(2) do |config|
 
   # accessing "localhost:8080" will access port 80 on the guest machine.
   # config.vm.network "forwarded_port", guest: 80, host: 8080
-  config.vm.network "forwarded_port", guest: 5000, host: 5000, host_ip: "127.0.0.1"
+  config.vm.network "forwarded_port", guest: 8080, host: 8080, host_ip: "127.0.0.1"
   config.vm.network "forwarded_port", guest: 5432, host: 5001, host_ip: "127.0.0.1"
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
-  config.vm.network "private_network", ip: "192.168.33.10"
+  config.vm.network "private_network", ip: "192.168.56.10"
 
   # Mac users can comment this next line out but
   # Windows users need to change the permission of files and directories
@@ -72,8 +72,8 @@ Vagrant.configure(2) do |config|
   end
 
   # Copy your IBM Cloud API Key if you have one
-  if File.exists?(File.expand_path("~/.bluemix/apiKey.json"))
-    config.vm.provision "file", source: "~/.bluemix/apiKey.json", destination: "~/.bluemix/apiKey.json"
+  if File.exists?(File.expand_path("~/.bluemix/apikey.json"))
+    config.vm.provision "file", source: "~/.bluemix/apikey.json", destination: "~/.bluemix/apikey.json"
   end
 
   ######################################################################
@@ -125,19 +125,17 @@ Vagrant.configure(2) do |config|
     # Show completion instructions
     sudo -H -u vagrant sh -c "echo alias ic=/usr/local/bin/ibmcloud >> ~/.bash_aliases"
     echo "\n************************************"
-    echo "If you have an IBM Cloud API key in ~/.bluemix/apiKey.json"
+    echo "If you have an IBM Cloud API key in ~/.bluemix/apikey.json"
     echo "You can login with the following command:"
     echo "\n"
     echo "ibmcloud login -a https://cloud.ibm.com --apikey @~/.bluemix/apikey.json -r us-south"
     echo "ibmcloud target --cf -o <your_org_here> -s dev"
     echo "\n************************************"
+
     # Show the GUI URL for Couch DB
     echo "\n"
     echo "CouchDB Admin GUI can be found at:\n"
-    #echo "PostgreSQL Admin GUI can be found at:\n"
     echo "http://127.0.0.1:5984/_utils"
   SHELL
-
-
 
 end

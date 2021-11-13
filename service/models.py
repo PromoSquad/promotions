@@ -151,11 +151,11 @@ class Promotion(db.Model):
   def find_by_status(cls, status: bool):
     logger.info("Processing lookup for status %s ...", status)
     return cls.query.filter_by(active=status).all()
-    
+
 ############################################################
 #  C L O U D A N T   D A T A B A S E   C O N N E C T I O N
 ############################################################
-'''
+
   @staticmethod
   def init_db(dbname='pets'):
       """
@@ -218,4 +218,4 @@ class Promotion(db.Model):
       # check for success
       if not Pet.database.exists():
           raise AssertionError('Database [{}] could not be obtained'.format(dbname))
-'''
+
