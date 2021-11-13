@@ -11,8 +11,8 @@ applications:
   buildpacks:
   - python_buildpack
   timeout: 180
-  services:
-  - Cloudant
+  #services:
+  #- Cloudant
   #- ElephantSQL
   env:
     FLASK_APP : service:app
