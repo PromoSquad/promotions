@@ -113,7 +113,7 @@ def activate_promotions(id):
 # UPDATE A PROMOTION TO DEACTIVATE
 ######################################################################
 @app.route("/promotions/<int:id>/deactivate", methods=["PUT"])
-def activate_promotions(id):
+def deactivate_promotions(id):
     """
     Update a Promotion to activate
     This endpoint will update a Promotion's activate status based the body that is posted
