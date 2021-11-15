@@ -222,7 +222,7 @@ class TestPromotionServer(unittest.TestCase):
         # update the promotion
         new_promotion = resp.get_json()
         logging.debug(new_promotion)
-        new_promotion["activate"] = "True"
+        new_promotion["active"] = "True"
         resp = self.app.put(
             "{0}/{1}".format(BASE_URL, new_promotion["id"]),
             json=new_promotion,
@@ -230,7 +230,7 @@ class TestPromotionServer(unittest.TestCase):
         )
         self.assertEqual(resp.status_code, status.HTTP_200_OK)
         activated_promotion = resp.get_json()
-        self.assertEqual(activated_promotion["activate"], "True")
+        self.assertEqual(activated_promotion["active"], "True")
 
     def test_activate_promotion_not_found(self):
         """ Update a product that's not found """
