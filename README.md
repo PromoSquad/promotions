@@ -23,18 +23,18 @@ Example response:
 
 ```jsonc
 [
-  {
-    "id": 1,
-    "product_id": 4,
-    "name": "Amazing",
-    "type": "coupon",
-    "description": "Amazing $10 coupon for toasters",
-    "meta": "{\"dollarsOff\":10}",
-    "begin_date": "18-Nov-2018 (08:34:58.674035)",
-    "end_date": null,
-    "active": true
-  }
-  // ...
+	{
+		"id": 1,
+		"product_id": 4,
+		"name": "Amazing",
+		"type": "coupon",
+		"description": "Amazing $10 coupon for toasters",
+		"meta": "{\"dollarsOff\":10}",
+		"begin_date": "18-Nov-2018 (08:34:58.674035)",
+		"end_date": null,
+		"active": true
+	}
+	// ...
 ]
 ```
 
@@ -46,15 +46,15 @@ Example response:
 
 ```jsonc
 {
-  "id": 1,
-  "product_id": 4,
-  "name": "Amazing",
-  "type": "coupon",
-  "description": "Amazing $10 coupon for toasters",
-  "meta": "{\"dollarsOff\":10}",
-  "begin_date": "18-Nov-2018 (08:34:58.674035)",
-  "end_date": null,
-  "active": true
+	"id": 1,
+	"product_id": 4,
+	"name": "Amazing",
+	"type": "coupon",
+	"description": "Amazing $10 coupon for toasters",
+	"meta": "{\"dollarsOff\":10}",
+	"begin_date": "18-Nov-2018 (08:34:58.674035)",
+	"end_date": null,
+	"active": true
 }
 ```
 
@@ -66,14 +66,14 @@ Example Request:
 
 ```jsonc
 {
-  "product_id": 4,
-  "name": "Amazing",
-  "type": "coupon",
-  "description": "Amazing $10 coupon for toasters",
-  "meta": "{\"dollarsOff\":10}",
-  "begin_date": "18-Nov-2018 (08:34:58.674035)",
-  "end_date": null,
-  "active": true
+	"product_id": 4,
+	"name": "Amazing",
+	"type": "coupon",
+	"description": "Amazing $10 coupon for toasters",
+	"meta": "{\"dollarsOff\":10}",
+	"begin_date": "18-Nov-2018 (08:34:58.674035)",
+	"end_date": null,
+	"active": true
 }
 ```
 
@@ -82,15 +82,15 @@ Example Response:
 ```jsonc
 // Location: http://localhost:8080/promotions/1
 {
-  "id": 1,
-  "product_id": 4,
-  "name": "Amazing",
-  "type": "coupon",
-  "description": "Amazing $10 coupon for toasters",
-  "meta": "{\"dollarsOff\":10}",
-  "begin_date": "18-Nov-2018 (08:34:58.674035)",
-  "end_date": null,
-  "active": true
+	"id": 1,
+	"product_id": 4,
+	"name": "Amazing",
+	"type": "coupon",
+	"description": "Amazing $10 coupon for toasters",
+	"meta": "{\"dollarsOff\":10}",
+	"begin_date": "18-Nov-2018 (08:34:58.674035)",
+	"end_date": null,
+	"active": true
 }
 ```
 
@@ -102,15 +102,15 @@ Example Request:
 
 ```jsonc
 {
-  "id": 1,
-  "product_id": 4,
-  "name": "Amazing",
-  "type": "coupon",
-  "description": "Amazing $10 coupon for toasters",
-  "meta": "{\"dollarsOff\":10}",
-  "begin_date": "18-Nov-2018 (08:34:58.674035)",
-  "end_date": null,
-  "active": true
+	"id": 1,
+	"product_id": 4,
+	"name": "Amazing",
+	"type": "coupon",
+	"description": "Amazing $10 coupon for toasters",
+	"meta": "{\"dollarsOff\":10}",
+	"begin_date": "18-Nov-2018 (08:34:58.674035)",
+	"end_date": null,
+	"active": true
 }
 ```
 
@@ -118,17 +118,20 @@ Example Response:
 
 ```jsonc
 {
-  "id": 1,
-  "product_id": 4,
-  "name": "Amazing",
-  "type": "coupon",
-  "description": "Amazing $10 coupon for toasters",
-  "meta": "{\"dollarsOff\":10}",
-  "begin_date": "18-Nov-2018 (08:34:58.674035)",
-  "end_date": null,
-  "active": true
+	"id": 1,
+	"product_id": 4,
+	"name": "Amazing",
+	"type": "coupon",
+	"description": "Amazing $10 coupon for toasters",
+	"meta": "{\"dollarsOff\":10}",
+	"begin_date": "18-Nov-2018 (08:34:58.674035)",
+	"end_date": null,
+	"active": true
 }
 ```
+
+```shell
+    $ honcho start
 
 ## License
 
@@ -137,3 +140,4 @@ MIT, see [LICENSE](./LICENSE) file for details.
 ---
 
 This repo is part of the DevOps course CSCI-GA.2820-001/002 at NYU taught by John Rofrano.
+```
