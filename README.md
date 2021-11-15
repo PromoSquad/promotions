@@ -130,8 +130,10 @@ Example Response:
 }
 ```
 
+honcho instructions:
+
 ```shell
-    $ honcho start
+     honcho start
 
 ## License
 
