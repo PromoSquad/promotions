@@ -109,6 +109,25 @@ def activate_promotions(id):
     promotion.update()
     return make_response(jsonify(promotion.serialize()), status.HTTP_200_OK)
 
+######################################################################
+# UPDATE A PROMOTION TO DEACTIVATE
+######################################################################
+@app.route("/promotions/<int:id>/deactivate", methods=["PUT"])
+def activate_promotions(id):
+    """
+    Update a Promotion to activate
+    This endpoint will update a Promotion's activate status based the body that is posted
+    """
+    app.logger.info("Request to update promotion with id: %s", id)
+    check_content_type("application/json")
+    promotion = Promotion.find(id)
+    if not promotion:
+        raise NotFound("Promotion with id '{}' was not found.".format(id))
+    promotion.deserialize(request.get_json())
+    promotion.active = False
+    promotion.update()
+    return make_response(jsonify(promotion.serialize()), status.HTTP_200_OK)
+
 def init_db():
     """ Initialize the SQLAlchemy app """
     global app
