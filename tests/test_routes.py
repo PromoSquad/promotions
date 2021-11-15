@@ -209,3 +209,4 @@ class TestPromotionServer(unittest.TestCase):
             json=test_promotion.serialize(),
             content_type="application/json")
         self.assertEqual(resp.status_code, status.HTTP_404_NOT_FOUND)
+
