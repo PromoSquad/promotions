@@ -109,7 +109,6 @@ def activate_promotions(id):
     promotion.update()
     return make_response(jsonify(promotion.serialize()), status.HTTP_200_OK)
 
-
 def init_db():
     """ Initialize the SQLAlchemy app """
     global app

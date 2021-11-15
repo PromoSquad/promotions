@@ -210,3 +210,33 @@ class TestPromotionServer(unittest.TestCase):
             content_type="application/json")
         self.assertEqual(resp.status_code, status.HTTP_404_NOT_FOUND)
 
+    def test_activate_promotion(self):
+        """ Update an existing Promotion """
+        # create a promotion to update
+        test_promotion = PromotionFactory()
+        resp = self.app.post(
+            BASE_URL, json=test_promotion.serialize(), content_type="application/json"
+        )
+        self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
+
+        # update the promotion
+        new_promotion = resp.get_json()
+        logging.debug(new_promotion)
+        new_promotion["description"] = "unknown"
+        resp = self.app.put(
+            "{0}/{1}".format(BASE_URL, new_promotion["id"]),
+            json=new_promotion,
+            content_type="application/json",
+        )
+        self.assertEqual(resp.status_code, status.HTTP_200_OK)
+        activated_promotion = resp.get_json()
+        self.assertEqual(updated_promotion["description"], "unknown")
+
+    def test_activate_promotion_not_found(self):
+        """ Update a product that's not found """
+        test_promotion = PromotionFactory()
+        resp = self.app.put(
+            "/promotions/0",
+            json=test_promotion.serialize(),
+            content_type="application/json")
+        self.assertEqual(resp.status_code, status.HTTP_404_NOT_FOUND)
