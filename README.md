@@ -13,6 +13,10 @@ This is still in progress. Additional information, new features and more are bei
 
 For instructions for developers, please refer to [CONTRIBUTING.md](./CONTRIBUTING.md).
 
+## Running on IBM Cloud
+
+The service is deployed on IBM Cloud. You can visit it at [https://nyu-promotion-service-fall2103.us-south.cf.appdomain.cloud/](https://nyu-promotion-service-fall2103.us-south.cf.appdomain.cloud/).
+
 ## Run Service by Honcho
 
 Make sure you have Python 3.8+ and [requirements.txt](./requirements.txt) installed. Then, run the following command:
@@ -20,8 +24,6 @@ Make sure you have Python 3.8+ and [requirements.txt](./requirements.txt) instal
 ```bash
 honcho start
 ```
-
-Or you can simply click the URL posted on the About
 
 ## Service RESTful API Routes
 
