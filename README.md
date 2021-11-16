@@ -13,6 +13,14 @@ This is still in progress. Additional information, new features and more are bei
 
 For instructions for developers, please refer to [CONTRIBUTING.md](./CONTRIBUTING.md).
 
+## Run Service by Honcho
+
+Make sure you have Python 3.8+ and [requirements.txt](./requirements.txt) installed. Then, run the following command:
+
+```bash
+honcho start
+```
+
 ## Service RESTful API Routes
 
 ### List all promotions
