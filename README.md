@@ -50,6 +50,52 @@ Example response:
 ]
 ```
 
+### List all active/inactive promotions
+
+`GET /promotions?status=(active|inactive)`
+
+Example response:
+
+```jsonc
+[
+  {
+    "id": 1,
+    "product_id": 4,
+    "name": "Amazing",
+    "type": "coupon",
+    "description": "Amazing $10 coupon for toasters",
+    "meta": "{\"dollarsOff\":10}",
+    "begin_date": "18-Nov-2018 (08:34:58.674035)",
+    "end_date": null,
+    "active": true
+  }
+  // ...
+]
+```
+
+### List all promotions related to a product
+
+`GET /promotions?productId=4`
+
+Example response:
+
+```jsonc
+[
+  {
+    "id": 1,
+    "product_id": 4,
+    "name": "Amazing",
+    "type": "coupon",
+    "description": "Amazing $10 coupon for toasters",
+    "meta": "{\"dollarsOff\":10}",
+    "begin_date": "18-Nov-2018 (08:34:58.674035)",
+    "end_date": null,
+    "active": true
+  }
+  // ...
+]
+```
+
 ### Get one promotion
 
 `GET /promotions/{id}`
@@ -139,6 +185,26 @@ Example Response:
   "begin_date": "18-Nov-2018 (08:34:58.674035)",
   "end_date": null,
   "active": true
+}
+```
+
+### Activate/Deactivate one promotion
+
+`PUT /promotions/{id}/(activate|deactivate)`
+
+Example Response:
+
+```jsonc
+{
+  "id": 1,
+  "product_id": 4,
+  "name": "Amazing",
+  "type": "coupon",
+  "description": "Amazing $10 coupon for toasters",
+  "meta": "{\"dollarsOff\":10}",
+  "begin_date": "18-Nov-2018 (08:34:58.674035)",
+  "end_date": null,
+  "active": true // or false
 }
 ```
 
