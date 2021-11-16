@@ -21,6 +21,8 @@ Make sure you have Python 3.8+ and [requirements.txt](./requirements.txt) instal
 honcho start
 ```
 
+Or you can simply click the URL posted on the About
+
 ## Service RESTful API Routes
 
 ### List all promotions
