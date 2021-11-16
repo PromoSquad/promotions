@@ -100,11 +100,9 @@ def activate_promotions(id):
     This endpoint will update a Promotion's activate status based the body that is posted
     """
     app.logger.info("Request to update promotion with id: %s", id)
-    check_content_type("application/json")
     promotion = Promotion.find(id)
     if not promotion:
         raise NotFound("Promotion with id '{}' was not found.".format(id))
-    promotion.deserialize(request.get_json())
     promotion.active = True
     promotion.update()
     return make_response(jsonify(promotion.serialize()), status.HTTP_200_OK)
@@ -119,11 +117,9 @@ def deactivate_promotions(id):
     This endpoint will update a Promotion's activate status based the body that is posted
     """
     app.logger.info("Request to update promotion with id: %s", id)
-    check_content_type("application/json")
     promotion = Promotion.find(id)
     if not promotion:
         raise NotFound("Promotion with id '{}' was not found.".format(id))
-    promotion.deserialize(request.get_json())
     promotion.active = False
     promotion.update()
     return make_response(jsonify(promotion.serialize()), status.HTTP_200_OK)
