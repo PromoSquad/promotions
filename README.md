@@ -22,7 +22,7 @@ The service is deployed on IBM Cloud. You can visit it at [https://nyu-promotion
 Make sure you have Python 3.8+ and [requirements.txt](./requirements.txt) installed. Then, run the following command:
 
 ```bash
-honcho start
+PORT=8080 honcho start
 ```
 
 ## Service RESTful API Routes
