@@ -209,3 +209,54 @@ class TestPromotionServer(unittest.TestCase):
             json=test_promotion.serialize(),
             content_type="application/json")
         self.assertEqual(resp.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_activate_promotion(self):
+        """ Activate a Promotion """
+        test_promotion = PromotionFactory()
+        test_promotion.active = False
+        resp = self.app.post(
+            BASE_URL, json=test_promotion.serialize(), content_type="application/json"
+        )
+        self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
+        new_promotion = resp.get_json()
+        self.assertEqual(new_promotion["active"], False)
+        resp = self.app.put(
+            "{0}/{1}/activate".format(BASE_URL, new_promotion["id"]),
+        )
+        self.assertEqual(resp.status_code, status.HTTP_200_OK)
+        updated_promotion = resp.get_json()
+        self.assertEqual(updated_promotion["active"], True)
+
+    def test_activate_promotion_not_found(self):
+        """ Activate a Promotion that's not found """
+        resp = self.app.put(
+            "/promotions/0/activate",
+            content_type="application/json",
+        )
+        self.assertEqual(resp.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_deactivate_promotion(self):
+        """ Deactivate a Promotion """
+        test_promotion = PromotionFactory()
+        test_promotion.active = True
+        resp = self.app.post(
+            BASE_URL, json=test_promotion.serialize(), content_type="application/json"
+        )
+        self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
+        new_promotion = resp.get_json()
+        self.assertEqual(new_promotion["active"], True)
+        resp = self.app.put(
+            "{0}/{1}/deactivate".format(BASE_URL, new_promotion["id"]),
+        )
+        self.assertEqual(resp.status_code, status.HTTP_200_OK)
+        updated_promotion = resp.get_json()
+        self.assertEqual(updated_promotion["active"], False)
+
+    def test_deactivate_promotion_not_found(self):
+        """ Deactivate a Promotion that's not found """
+        resp = self.app.put(
+            "/promotions/0/deactivate",
+            content_type="application/json",
+        )
+        self.assertEqual(resp.status_code, status.HTTP_404_NOT_FOUND)
+

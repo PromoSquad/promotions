@@ -14,3 +14,5 @@ __pycache__/
 
 *.log
 .coverage
+coverage.xml
+unittests.xml
