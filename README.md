@@ -3,7 +3,7 @@
 
 # promotions
 
-Project Promotions repo for NYU DevOps Fall 2021. A microservice that manages promotion information, leveraging technologies including Flask(Python), PostgreSQL, Travis CI and IBM Cloud.
+Project Promotions repo for NYU DevOps Fall 2021. A microservice that manages promotion information, leveraging technologies including Flask(Python), PostgreSQL, GitHub Actions and IBM Cloud.
 
 ## About
 
