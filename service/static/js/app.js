@@ -111,6 +111,46 @@ const app = {
         return;
       }
     },
+    async onActivateButtonClick() {
+      this.clearAlert();
+      let idStr = this.input.id;
+      if (idStr === "") {
+        this.showError("Promotion ID cannot be empty.");
+        return;
+      }
+      let id = Number(idStr);
+      if (isNaN(id)) {
+        this.showError(`Invalid Promotion ID "${idStr}".`);
+        return;
+      }
+      try {
+        await activatePromotion(id);
+        this.showSuccess(`Promotion ${id} activated successfully.`);
+      } catch (error) {
+        this.showError(error.message);
+        return;
+      }
+    },
+    async onDeactivateButtonClick() {
+      this.clearAlert();
+      let idStr = this.input.id;
+      if (idStr === "") {
+        this.showError("Promotion ID cannot be empty.");
+        return;
+      }
+      let id = Number(idStr);
+      if (isNaN(id)) {
+        this.showError(`Invalid Promotion ID "${idStr}".`);
+        return;
+      }
+      try {
+        await deactivatePromotion(id);
+        this.showSuccess(`Promotion ${id} deactivated successfully.`);
+      } catch (error) {
+        this.showError(error.message);
+        return;
+      }
+    },
     async onCreateButtonClick() {
       this.clearAlert();
       let {

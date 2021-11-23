@@ -92,6 +92,14 @@ async function updatePromotion(id, data) {
   return put(`/promotions/${id}`, data);
 }
 
+async function activatePromotion(id) {
+  return put(`/promotions/${id}/activate`);
+}
+
+async function deactivatePromotion(id) {
+  return put(`/promotions/${id}/deactivate`);
+}
+
 async function deletePromotion(id) {
   return del(`/promotions/${id}`);
 }
