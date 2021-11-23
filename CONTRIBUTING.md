@@ -45,7 +45,7 @@ This is with auto-reloader and debugger on. `--reload` enables auto-reloader so 
 ### Start in production mode
 
 ```bash
-FLASK_APP=service:app flask run --host=0.0.0.0 --port=8080
+PORT=8080 honcho start
 ```
 
 ### Run tests
