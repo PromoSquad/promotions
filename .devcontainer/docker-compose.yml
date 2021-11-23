@@ -4,9 +4,7 @@ version: "3"
 
 services:
   app:
-    build:
-      context: ..
-      dockerfile: .devcontainer/Dockerfile
+    image: ghcr.io/promosquad/docker-dev:latest
     hostname: nyu
     ports:
       - 8080:8080
