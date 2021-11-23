@@ -72,6 +72,19 @@ class TestPromotionServer(unittest.TestCase):
         data = resp.get_json()
         self.assertEqual(len(data), 5)
 
+    def test_query_promotion_list_by_name(self):
+        promotions = self._create_promotions(10)
+        test_name = promotions[0].name
+        name_promotions = [p for p in promotions if p.name == test_name]
+        resp = self.app.get(
+            BASE_URL, query_string="name={}".format(test_name)
+        )
+        self.assertEqual(resp.status_code, status.HTTP_200_OK)
+        data = resp.get_json()
+        self.assertEqual(len(data), len(name_promotions))
+        for promotion in data:
+            self.assertEqual(promotion["name"], test_name)
+
     def test_query_promotion_list_by_status(self):
         promotions = self._create_promotions(10)
         active_promotions = [p for p in promotions if p.active]

@@ -140,6 +140,11 @@ class Promotion(db.Model):
     return cls.query.get(id)
 
   @classmethod
+  def find_by_name(cls, name: str):
+    logger.info("Processing lookup for name %s ...", name)
+    return cls.query.filter_by(name=name).all()
+
+  @classmethod
   def find_by_productId(cls, productId: int):
     """Returns all Promotions with the given product_id
     Args:
