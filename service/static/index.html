@@ -59,234 +59,292 @@
                   <i class="bi bi-x"></i>
                 </button>
               </div>
-              <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-item">
-                    <div class="label">Promotion ID</div>
-                    <div class="input">
-                      <div class="row">
-                        <div class="col-sm-6" style="margin-bottom: 10px">
-                          <input
-                            type="text"
-                            class="form-control"
-                            name="id"
-                            placeholder="e.g. 1"
-                            v-model="input.id"
-                          />
-                        </div>
-                        <div class="col-sm-6">
-                          <button
-                            id="retrieve-button"
-                            type="button"
-                            class="btn btn-primary"
-                            @click="onRetrieveButtonClick"
-                          >
-                            Retrieve
-                          </button>
-                          <button
-                            id="delete-button"
-                            type="button"
-                            class="btn btn-danger"
-                            style="margin-left: 5px"
-                            @click="onDeleteButtonClick"
-                          >
-                            Delete
-                          </button>
-                          <button
-                            id="activate-button"
-                            type="button"
-                            class="btn btn-light"
-                            style="margin-left: 5px"
-                            @click="onActivateButtonClick"
-                          >
-                            Activate
-                          </button>
-                          <button
-                            id="deactivate-button"
-                            type="button"
-                            class="btn btn-light"
-                            style="margin-left: 5px"
-                            @click="onDeactivateButtonClick"
-                          >
-                            Deactivate
-                          </button>
+              <transition name="section">
+                <div id="id-control-section" v-if="!searchMode">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div class="form-item">
+                        <div class="label">Promotion ID</div>
+                        <div class="input">
+                          <div class="row">
+                            <div class="col-sm-6" style="margin-bottom: 10px">
+                              <input
+                                type="text"
+                                class="form-control"
+                                name="id"
+                                placeholder="e.g. 1"
+                                v-model="input.id"
+                              />
+                            </div>
+                            <div class="col-sm-6">
+                              <button
+                                id="retrieve-button"
+                                type="button"
+                                class="btn btn-primary"
+                                @click="onRetrieveButtonClick"
+                              >
+                                Retrieve
+                              </button>
+                              <button
+                                id="delete-button"
+                                type="button"
+                                class="btn btn-danger"
+                                style="margin-left: 5px"
+                                @click="onDeleteButtonClick"
+                              >
+                                Delete
+                              </button>
+                              <button
+                                id="activate-button"
+                                type="button"
+                                class="btn btn-light"
+                                style="margin-left: 5px"
+                                @click="onActivateButtonClick"
+                              >
+                                Activate
+                              </button>
+                              <button
+                                id="deactivate-button"
+                                type="button"
+                                class="btn btn-light"
+                                style="margin-left: 5px"
+                                @click="onDeactivateButtonClick"
+                              >
+                                Deactivate
+                              </button>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
+                  <div class="divide-line"></div>
                 </div>
-              </div>
-              <div class="divide-line"></div>
-              <div class="row">
-                <div class="col-sm-4">
-                  <div class="form-item">
-                    <div class="label">Name</div>
-                    <div class="input">
-                      <input
-                        type="text"
-                        class="form-control"
-                        name="name"
-                        placeholder="e.g. Toaster Discount"
-                        v-model="input.name"
-                      />
+              </transition>
+              <div id="search-section">
+                <div class="row">
+                  <div class="col-sm-4">
+                    <div class="form-item">
+                      <div class="label" @click="onSearchRadioClick('name')">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="flexRadioDefault"
+                          v-if="searchMode"
+                          :checked="searchMode==='name'"
+                        />
+                        Name
+                      </div>
+                      <div class="input">
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="name"
+                          placeholder="e.g. Toaster Discount"
+                          v-model="input.name"
+                        />
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="col-sm-4">
-                  <div class="form-item">
-                    <div class="label">Product ID</div>
-                    <div class="input">
-                      <input
-                        type="text"
-                        class="form-control"
-                        name="productId"
-                        placeholder="e.g. 100"
-                        v-model="input.product_id"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-4">
-                  <div class="form-item">
-                    <div class="label">Status</div>
-                    <div class="input">
-                      <select
-                        class="form-select"
-                        name="status"
-                        v-model="input.status"
+                  <div class="col-sm-4">
+                    <div class="form-item">
+                      <div
+                        class="label"
+                        @click="onSearchRadioClick('product_id')"
                       >
-                        <option value="all" selected>All</option>
-                        <option value="active">Active</option>
-                        <option value="inactive">Inactive</option>
-                      </select>
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="flexRadioDefault"
+                          v-if="searchMode"
+                          :checked="searchMode==='product_id'"
+                        />
+                        Product ID
+                      </div>
+                      <div class="input">
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="productId"
+                          placeholder="e.g. 100"
+                          v-model="input.product_id"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-item">
+                      <div class="label" @click="onSearchRadioClick('status')">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="flexRadioDefault"
+                          v-if="searchMode"
+                          :checked="searchMode==='status'"
+                        />
+                        Status
+                      </div>
+                      <div class="input">
+                        <select
+                          class="form-select"
+                          name="status"
+                          v-model="input.status"
+                        >
+                          <option value="active">Active</option>
+                          <option value="inactive">Inactive</option>
+                        </select>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="row" style="padding: 0 10px 10px 10px">
-                <button type="button" class="btn btn-primary">
-                  <i
-                    class="bi bi-search"
-                    style="font-size: 13px; margin-right: 4px"
-                  ></i>
-                  Search
-                </button>
-              </div>
-              <div class="divide-line"></div>
-              <div class="row">
-                <div class="form-item">
-                  <div class="label">Description</div>
-                  <div class="input">
-                    <input
-                      type="text"
-                      class="form-control"
-                      name="description"
-                      placeholder="optional, e.g. amazing coupon for toasters"
-                      v-model="input.description"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-4">
-                  <div class="form-item">
-                    <div class="label">Type</div>
-                    <div class="input">
-                      <select
-                        class="form-select"
-                        name="type"
-                        v-model="input.type"
-                      >
-                        <option value="percentage" selected>Percentage</option>
-                        <option value="coupon">Coupon</option>
-                        <option value="bogo">BOGO</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-8">
-                  <div class="form-item">
-                    <div class="label">Meta</div>
-                    <div class="input">
-                      <input
-                        type="text"
-                        class="form-control"
-                        name="meta"
-                        :placeholder="'e.g. ' + metaPlaceholders[input.type]"
-                        v-model="input.meta"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-6">
-                  <div class="form-item">
-                    <div class="label">Begin date</div>
-                    <div class="input">
-                      <input
-                        type="text"
-                        class="form-control"
-                        name="beginDate"
-                        placeholder="e.g. 18-Nov-2018 (08:34:58.674035)"
-                        v-model="input.begin_date"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-6">
-                  <div class="form-item">
-                    <div class="label">End date</div>
-                    <div class="input">
-                      <input
-                        type="text"
-                        class="form-control"
-                        name="endDate"
-                        placeholder="optional, e.g. 18-Nov-2018 (08:34:58.674035)"
-                        v-model="input.end_date"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row g-2" style="margin-top: 5px; margin-bottom: 15px">
-                <div class="col-auto">
+                <div class="row search-btn-group">
+                  <button
+                    type="button"
+                    class="btn btn-light"
+                    style="width: 60px; flex-grow: 0; margin-right: 5px"
+                    v-if="searchMode"
+                    id="back-from-search-button"
+                    @click="onBackFromSearchButtonClick"
+                  >
+                    <i class="bi bi-chevron-left"></i>
+                  </button>
                   <button
                     type="button"
                     class="btn btn-primary"
-                    @click="onCreateButtonClick"
+                    @click="onSearchButtonClick"
                   >
-                    Create
-                  </button>
-                </div>
-                <div class="col-auto">
-                  <button
-                    type="button"
-                    class="btn btn-success"
-                    @click="onUpdateButtonClick"
-                  >
-                    Update
-                  </button>
-                </div>
-                <div class="col-auto">
-                  <button
-                    type="button"
-                    class="btn btn-light"
-                    @click="onFillWithSampleButtonClick"
-                  >
-                    Fill with sample
-                  </button>
-                </div>
-                <div class="col-auto">
-                  <button
-                    type="button"
-                    class="btn btn-light"
-                    @click="onResetButtonClick"
-                  >
-                    Reset
+                    <i
+                      class="bi bi-search"
+                      style="font-size: 13px; margin-right: 4px"
+                    ></i>
+                    Search
                   </button>
                 </div>
               </div>
+              <transition name="section">
+                <div id="promotion-control-section" v-if="!searchMode">
+                  <div class="divide-line"></div>
+                  <div class="row">
+                    <div class="form-item">
+                      <div class="label">Description</div>
+                      <div class="input">
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="description"
+                          placeholder="optional, e.g. amazing coupon for toasters"
+                          v-model="input.description"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <div class="form-item">
+                        <div class="label">Type</div>
+                        <div class="input">
+                          <select
+                            class="form-select"
+                            name="type"
+                            v-model="input.type"
+                          >
+                            <option value="percentage" selected>
+                              Percentage
+                            </option>
+                            <option value="coupon">Coupon</option>
+                            <option value="bogo">BOGO</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-8">
+                      <div class="form-item">
+                        <div class="label">Meta</div>
+                        <div class="input">
+                          <input
+                            type="text"
+                            class="form-control"
+                            name="meta"
+                            :placeholder="'e.g. ' + metaPlaceholders[input.type]"
+                            v-model="input.meta"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="form-item">
+                        <div class="label">Begin date</div>
+                        <div class="input">
+                          <input
+                            type="text"
+                            class="form-control"
+                            name="beginDate"
+                            placeholder="e.g. 18-Nov-2018 (08:34:58.674035)"
+                            v-model="input.begin_date"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-item">
+                        <div class="label">End date</div>
+                        <div class="input">
+                          <input
+                            type="text"
+                            class="form-control"
+                            name="endDate"
+                            placeholder="optional, e.g. 18-Nov-2018 (08:34:58.674035)"
+                            v-model="input.end_date"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="row g-2"
+                    style="margin-top: 5px; margin-bottom: 15px"
+                  >
+                    <div class="col-auto">
+                      <button
+                        type="button"
+                        class="btn btn-primary"
+                        @click="onCreateButtonClick"
+                      >
+                        Create
+                      </button>
+                    </div>
+                    <div class="col-auto">
+                      <button
+                        type="button"
+                        class="btn btn-success"
+                        @click="onUpdateButtonClick"
+                      >
+                        Update
+                      </button>
+                    </div>
+                    <div class="col-auto">
+                      <button
+                        type="button"
+                        class="btn btn-light"
+                        @click="onFillWithSampleButtonClick"
+                      >
+                        Fill with sample
+                      </button>
+                    </div>
+                    <div class="col-auto">
+                      <button
+                        type="button"
+                        class="btn btn-light"
+                        @click="onResetButtonClick"
+                      >
+                        Reset
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </transition>
             </form>
           </div>
         </div>

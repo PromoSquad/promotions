@@ -5,7 +5,7 @@ const app = {
         id: "",
         name: "",
         product_id: "",
-        status: "all",
+        status: "active",
         description: "",
         type: "percentage",
         meta: "",
@@ -18,6 +18,7 @@ const app = {
         bogo: '{"buy": 1, "get": 2}',
       },
       alert: undefined,
+      searchMode: undefined,
     };
   },
   methods: {
@@ -151,6 +152,30 @@ const app = {
         return;
       }
     },
+    onSearchRadioClick(mode) {
+      if (!this.searchMode) {
+        return;
+      }
+      this.searchMode = mode;
+    },
+    onBackFromSearchButtonClick() {
+      this.searchMode = undefined;
+    },
+    async onSearchButtonClick() {
+      this.clearAlert();
+      if (!this.searchMode) {
+        if (this.input.name) {
+          this.searchMode = "name";
+        } else if (this.input.product_id) {
+          this.searchMode = "product_id";
+        } else if (this.input.status) {
+          this.searchMode = "status";
+        } else {
+          this.showError("Please enter a search term.");
+          return;
+        }
+      }
+    },
     async onCreateButtonClick() {
       this.clearAlert();
       let {
@@ -163,10 +188,6 @@ const app = {
         end_date,
         status,
       } = this.input;
-      if (status === "all") {
-        this.showError("Status cannot be 'all' for promotion to be created.");
-        return;
-      }
       if (product_id === "") {
         product_id = undefined;
       }
@@ -219,10 +240,6 @@ const app = {
         end_date,
         status,
       } = this.input;
-      if (status === "all") {
-        this.showError("Status cannot be 'all' for promotion to be created.");
-        return;
-      }
       if (product_id === "") {
         product_id = undefined;
       }
@@ -272,7 +289,7 @@ const app = {
         id: "",
         name: "",
         product_id: "",
-        status: "all",
+        status: "active",
         description: "",
         type: "percentage",
         meta: "",

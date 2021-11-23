@@ -79,6 +79,21 @@ body {
   margin-top: 20px;
 }
 
+.top-form .search-btn-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  padding: 0 10px 10px 10px;
+  box-sizing: border-box;
+}
+
+.top-form .search-btn-group .btn {
+  width: auto;
+  flex: 1;
+}
+
 .body {
   width: 100%;
 }
@@ -110,4 +125,14 @@ body {
 
 .fadeIn {
   animation-name: fadeIn;
+}
+
+.section-enter-active,
+.section-leave-active {
+  transition: all 0.2s;
+}
+
+.section-enter-from,
+.section-leave-to {
+  opacity: 0;
 }
