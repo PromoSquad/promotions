@@ -208,6 +208,12 @@ Example Response:
 }
 ```
 
+### Delete one promotion
+
+`DELETE /promotions/{id}`
+
+Response: 204 No Content
+
 ## License
 
 MIT, see [LICENSE](./LICENSE) file for details.
