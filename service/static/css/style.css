@@ -30,6 +30,7 @@ body {
   display: flex;
   flex-direction: row;
   align-items: center;
+  user-select: none;
 }
 
 .header .logo img {
@@ -39,7 +40,7 @@ body {
 }
 
 .header .logo span {
-  margin-left: 8px;
+  margin-left: 10px;
   font-size: 22px;
   color: #f56c6c;
   font-family: "Montserrat", sans-serif;

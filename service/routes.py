@@ -59,7 +59,7 @@ def list_promotions():
 @app.route("/promotions/<int:id>", methods=["DELETE"])
 def delete_promotions(id):
     """
-    Delete a Promotioon
+    Delete a Promotion
     This endpoint will delete a Promotion based the id specified in the path
     """
     app.logger.info("Request to delete promotion with id: %s", id)
