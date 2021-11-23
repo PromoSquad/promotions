@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Promotions REST API Service Demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css"
+    />
+    <link href="css/style.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.2.22/dist/vue.global.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div class="top">
+        <div class="content container">
+          <div class="header">
+            <div class="logo">
+              <img src="img/logo.svg" />
+              <span>Promotions</span>
+            </div>
+          </div>
+          <div class="top-form">
+            <div class="title">REST API Service Demo</div>
+            <form>
+              <div
+                :class="'alert animated fadeIn alert-' + alert.type"
+                role="alert"
+                v-if="alert"
+                style="
+                  display: flex;
+                  flex-direction: row;
+                  justify-content: space-between;
+                  align-items: center;
+                "
+              >
+                <div id="alert-message">{{ alert.message }}</div>
+                <button
+                  type="button"
+                  class="btn"
+                  style="padding: 0"
+                  @click="clearAlert"
+                >
+                  <i class="bi bi-x"></i>
+                </button>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-item">
+                    <div class="label">Promotion ID</div>
+                    <div class="input">
+                      <div class="row">
+                        <div class="col-sm-6" style="margin-bottom: 10px">
+                          <input
+                            type="text"
+                            class="form-control"
+                            name="id"
+                            placeholder="e.g. 1"
+                            v-model="input.id"
+                          />
+                        </div>
+                        <div class="col-sm-6">
+                          <button
+                            id="retrieve-button"
+                            type="button"
+                            class="btn btn-primary"
+                            @click="onRetrieveButtonClick"
+                          >
+                            Retrieve
+                          </button>
+                          <button
+                            id="delete-button"
+                            type="button"
+                            class="btn btn-danger"
+                            style="margin-left: 5px"
+                            @click="onDeleteButtonClick"
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="divide-line"></div>
+              <div class="row">
+                <div class="col-sm-4">
+                  <div class="form-item">
+                    <div class="label">Name</div>
+                    <div class="input">
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="name"
+                        placeholder="e.g. Toaster Discount"
+                        v-model="input.name"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-item">
+                    <div class="label">Product ID</div>
+                    <div class="input">
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="productId"
+                        placeholder="e.g. 100"
+                        v-model="input.product_id"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-item">
+                    <div class="label">Status</div>
+                    <div class="input">
+                      <select
+                        class="form-select"
+                        name="status"
+                        v-model="input.status"
+                      >
+                        <option value="all" selected>All</option>
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row" style="padding: 0 10px 10px 10px">
+                <button type="button" class="btn btn-primary">
+                  <i
+                    class="bi bi-search"
+                    style="font-size: 13px; margin-right: 4px"
+                  ></i>
+                  Search
+                </button>
+              </div>
+              <div class="divide-line"></div>
+              <div class="row">
+                <div class="form-item">
+                  <div class="label">Description</div>
+                  <div class="input">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="description"
+                      placeholder="optional, e.g. amazing coupon for toasters"
+                      v-model="input.description"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-4">
+                  <div class="form-item">
+                    <div class="label">Type</div>
+                    <div class="input">
+                      <select
+                        class="form-select"
+                        name="type"
+                        v-model="input.type"
+                      >
+                        <option value="percentage" selected>Percentage</option>
+                        <option value="coupon">Coupon</option>
+                        <option value="bogo">BOGO</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-8">
+                  <div class="form-item">
+                    <div class="label">Meta</div>
+                    <div class="input">
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="meta"
+                        :placeholder="'e.g. ' + metaPlaceholders[input.type]"
+                        v-model="input.meta"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-item">
+                    <div class="label">Begin date</div>
+                    <div class="input">
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="beginDate"
+                        placeholder="e.g. 18-Nov-2018 (08:34:58.674035)"
+                        v-model="input.begin_date"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-item">
+                    <div class="label">End date</div>
+                    <div class="input">
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="endDate"
+                        placeholder="optional, e.g. 18-Nov-2018 (08:34:58.674035)"
+                        v-model="input.end_date"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row g-2" style="margin-top: 5px; margin-bottom: 15px">
+                <div class="col-auto">
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    @click="onCreateButtonClick"
+                  >
+                    Create
+                  </button>
+                </div>
+                <div class="col-auto">
+                  <button
+                    type="button"
+                    class="btn btn-success"
+                    @click="onUpdateButtonClick"
+                  >
+                    Update
+                  </button>
+                </div>
+                <div class="col-auto">
+                  <button
+                    type="button"
+                    class="btn btn-light"
+                    @click="onFillWithSampleButtonClick"
+                  >
+                    Fill with sample
+                  </button>
+                </div>
+                <div class="col-auto">
+                  <button
+                    type="button"
+                    class="btn btn-light"
+                    @click="onResetButtonClick"
+                  >
+                    Reset
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="body">
+        <div class="content container" style="padding: 30px 0">
+          <div class="row g-3">
+            <div class="col-sm-12">
+              <div class="card">
+                <img
+                  src="https://www.ndvax.org/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBNk1EQlE9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--675d17850b4958157e947951755686414171f935/clinic2443.png"
+                  class="card-img-top"
+                />
+                <div class="card-body">
+                  <h5 class="card-title">Prairie Sinus Ear Allergy Clinic</h5>
+                  <p class="card-text">
+                    3000 N 14th St, Suite 3A, Bismarck ND, 58503 <br />
+                    <b>Vaccinations offered:</b> Contact Clinic Site <br />
+                    <b>Age groups served:</b> Adults, Seniors <br />
+                    <b>Services offered:</b> COVID-19 Vaccination
+                  </p>
+                  <a href="#" class="btn btn-primary">Sign up</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <div>©️ 2021 PromoSquad</div>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+    <script src="js/api.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
