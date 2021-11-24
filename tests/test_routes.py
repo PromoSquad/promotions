@@ -61,8 +61,6 @@ class TestPromotionServer(unittest.TestCase):
     def test_index(self):
         resp = self.app.get("/")
         self.assertEqual(resp.status_code, status.HTTP_200_OK)
-        data = resp.get_json()
-        self.assertEqual(data["name"], "Promotion REST API Service")
 
     def test_get_promotion_list(self):
         """ Get a list of Promotions """
@@ -71,6 +69,19 @@ class TestPromotionServer(unittest.TestCase):
         self.assertEqual(resp.status_code, status.HTTP_200_OK)
         data = resp.get_json()
         self.assertEqual(len(data), 5)
+
+    def test_query_promotion_list_by_name(self):
+        promotions = self._create_promotions(10)
+        test_name = promotions[0].name
+        name_promotions = [p for p in promotions if p.name == test_name]
+        resp = self.app.get(
+            BASE_URL, query_string="name={}".format(test_name)
+        )
+        self.assertEqual(resp.status_code, status.HTTP_200_OK)
+        data = resp.get_json()
+        self.assertEqual(len(data), len(name_promotions))
+        for promotion in data:
+            self.assertEqual(promotion["name"], test_name)
 
     def test_query_promotion_list_by_status(self):
         promotions = self._create_promotions(10)
@@ -177,6 +188,11 @@ class TestPromotionServer(unittest.TestCase):
         resp = self.app.get(
             "{}/{}".format(BASE_URL, test_promotion.id), content_type="application/json"
         )
+        self.assertEqual(resp.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_delete_promotion_not_found(self):
+        """ Delete a Promotion that does not exist """
+        resp = self.app.delete("{}/0".format(BASE_URL))
         self.assertEqual(resp.status_code, status.HTTP_404_NOT_FOUND)
 
     def test_update_promotion(self):

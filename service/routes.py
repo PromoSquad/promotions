@@ -7,13 +7,7 @@ from . import status
 
 @app.route('/')
 def index():
-    return (
-        jsonify(
-            name="Promotion REST API Service",
-            version="1.0"
-        ),
-        status.HTTP_200_OK
-    )
+    return app.send_static_file('index.html')
 
 @app.route('/promotions/<int:id>', methods=["GET"])
 def get_promotions(id):
@@ -46,10 +40,13 @@ def list_promotions():
     promotions = []
     query_status = request.args.get("status")
     query_productId = request.args.get("productId")
-    if query_status:
-        promotions = Promotion.find_by_status(query_status.lower()=="active")
+    query_name = request.args.get("name")
+    if query_name:
+        promotions = Promotion.find_by_name(query_name)
     elif query_productId:
         promotions = Promotion.find_by_productId(query_productId)
+    elif query_status:
+        promotions = Promotion.find_by_status(query_status.lower()=="active")
     else:
         promotions = Promotion.all()
 
@@ -62,13 +59,14 @@ def list_promotions():
 @app.route("/promotions/<int:id>", methods=["DELETE"])
 def delete_promotions(id):
     """
-    Delete a Promotioon
+    Delete a Promotion
     This endpoint will delete a Promotion based the id specified in the path
     """
     app.logger.info("Request to delete promotion with id: %s", id)
     promotion = Promotion.find(id)
-    if promotion:
-        promotion.delete()
+    if not promotion:
+        raise NotFound("Promotion with id '{}' was not found.".format(id))
+    promotion.delete()
     return make_response("", status.HTTP_204_NO_CONTENT)
 
 ######################################################################
