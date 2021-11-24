@@ -73,7 +73,7 @@ async function getPromotionsByName(name) {
 }
 
 async function getPromotionsByProductId(productId) {
-  return get(`/promotions?product_id=${productId}`);
+  return get(`/promotions?productId=${productId}`);
 }
 
 async function getPromotionsByStatus(status) {

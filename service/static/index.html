@@ -201,6 +201,7 @@
                           name="status"
                           v-model="input.status"
                         >
+                          <option value="all" v-if="searchMode">All</option>
                           <option value="active">Active</option>
                           <option value="inactive">Inactive</option>
                         </select>
@@ -353,21 +354,27 @@
       <div class="body">
         <div class="content container" style="padding: 30px 0">
           <div class="row g-3">
-            <div class="col-sm-12">
-              <div class="card">
-                <img
-                  src="https://www.ndvax.org/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBNk1EQlE9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--675d17850b4958157e947951755686414171f935/clinic2443.png"
-                  class="card-img-top"
-                />
+            <div class="col-sm-6 col-md-4" v-for="promotion in promotions">
+              <div class="card promotion-card">
                 <div class="card-body">
-                  <h5 class="card-title">Prairie Sinus Ear Allergy Clinic</h5>
-                  <p class="card-text">
-                    3000 N 14th St, Suite 3A, Bismarck ND, 58503 <br />
-                    <b>Vaccinations offered:</b> Contact Clinic Site <br />
-                    <b>Age groups served:</b> Adults, Seniors <br />
-                    <b>Services offered:</b> COVID-19 Vaccination
-                  </p>
-                  <a href="#" class="btn btn-primary">Sign up</a>
+                  <h5 class="card-title">
+                    <span style="color: #999">#{{promotion.id}}</span>
+                    {{promotion.name}}
+                  </h5>
+                  <div class="card-text">
+                    <div class="description">{{promotion.description}}</div>
+                    <div>
+                      <b>Status:</b> {{promotion.active ? 'active' :
+                      'inactive'}}
+                    </div>
+                    <div>
+                      <b>Product ID:</b> {{promotion.product_id || 'null'}}
+                    </div>
+                    <div><b>Type:</b> {{promotion.type}}</div>
+                    <div><b>Meta:</b> {{promotion.meta}}</div>
+                    <div><b>Begin date:</b> {{promotion.begin_date}}</div>
+                    <div><b>End date:</b> {{promotion.end_date || 'null'}}</div>
+                  </div>
                 </div>
               </div>
             </div>

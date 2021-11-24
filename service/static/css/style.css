@@ -107,6 +107,18 @@ body {
   width: 100%;
 }
 
+.promotion-card {
+  padding: 0;
+}
+
+.promotion-card .card-body {
+  padding: 20px;
+}
+
+.promotion-card .description {
+  color: #666;
+}
+
 .footer {
   display: flex;
   flex-direction: column;

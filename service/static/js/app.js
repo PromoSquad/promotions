@@ -19,6 +19,7 @@ const app = {
       },
       alert: undefined,
       searchMode: undefined,
+      promotions: [],
     };
   },
   methods: {
@@ -159,6 +160,9 @@ const app = {
       this.searchMode = mode;
     },
     onBackFromSearchButtonClick() {
+      if (this.input.status === "all") {
+        this.input.status = "active";
+      }
       this.searchMode = undefined;
     },
     async onSearchButtonClick() {
@@ -174,6 +178,35 @@ const app = {
           this.showError("Please enter a search term.");
           return;
         }
+      }
+      try {
+        let promotions;
+        switch (this.searchMode) {
+          default:
+          case "name":
+            promotions = await getPromotionsByName(this.input.name);
+            break;
+          case "product_id":
+            let productId = Number(this.input.product_id);
+            if (isNaN(productId)) {
+              this.showError(`Invalid Product ID "${this.input.product_id}".`);
+              return;
+            }
+            promotions = await getPromotionsByProductId(this.input.product_id);
+            break;
+          case "status":
+            if (this.input.status === "all") {
+              promotions = await getPromotions();
+            } else {
+              promotions = await getPromotionsByStatus(this.input.status);
+            }
+            break;
+        }
+        console.log(promotions);
+        this.promotions = promotions;
+      } catch (error) {
+        this.showError(error.message);
+        return;
       }
     },
     async onCreateButtonClick() {
