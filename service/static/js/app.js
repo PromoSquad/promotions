@@ -24,6 +24,7 @@ const app = {
   },
   methods: {
     showError(message) {
+      window.scrollTo(0, 0);
       setTimeout(() => {
         this.alert = {
           type: "danger",
