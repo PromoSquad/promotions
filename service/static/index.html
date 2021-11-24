@@ -122,6 +122,17 @@
                 </div>
               </transition>
               <div id="search-section">
+                <div class="row search-header" v-if="searchMode">
+                  <button
+                    type="button"
+                    class="btn btn-light"
+                    id="back-from-search-button"
+                    @click="onBackFromSearchButtonClick"
+                  >
+                    <i class="bi bi-chevron-left"></i>
+                  </button>
+                  <div class="title">Search by</div>
+                </div>
                 <div class="row">
                   <div class="col-sm-4">
                     <div class="form-item">
@@ -197,17 +208,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="row search-btn-group">
-                  <button
-                    type="button"
-                    class="btn btn-light"
-                    style="width: 60px; flex-grow: 0; margin-right: 5px"
-                    v-if="searchMode"
-                    id="back-from-search-button"
-                    @click="onBackFromSearchButtonClick"
-                  >
-                    <i class="bi bi-chevron-left"></i>
-                  </button>
+                <div class="row" style="padding: 0 10px 10px 10px">
                   <button
                     type="button"
                     class="btn btn-primary"
