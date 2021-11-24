@@ -14,5 +14,5 @@ Background:
 
 Scenario: The server is running
   When I visit the "Home Page"
-  Then I should see "REST API Service Demo" in the title
+  Then I should see "Promotions RESTful Service Demo" in the title
   And I should not see "404 Not Found"

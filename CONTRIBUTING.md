@@ -45,15 +45,46 @@ This is with auto-reloader and debugger on. `--reload` enables auto-reloader so 
 ### Start in production mode
 
 ```bash
-PORT=8080 honcho start
+ex
 ```
 
-### Run tests
+### Run TDD tests
 
 Tests are written and put under folder `tests`. We use `nosetests` to run these tests and report coverages:
 
 ```bash
 nosetests
+```
+
+### Run BDD tests
+
+Before you run the BDD tests, you should first start the service in dev or production mode at port 8080.
+
+Then run the tests:
+
+```bash
+behave
+```
+
+## IBM Cloud
+
+### Login and target resource
+
+```bash
+ibmcloud login -a https://cloud.ibm.com --apikey @~/.bluemix/apikey.json -r us-south
+ibmcloud target --cf -o yk2494@nyu.edu -s dev
+```
+
+### List Cloud Foundry apps
+
+```bash
+ibmcloud cf apps
+```
+
+### Deploy
+
+```bash
+ibmcloud cf push
 ```
 
 ## Model
