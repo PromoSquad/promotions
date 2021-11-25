@@ -48,3 +48,16 @@ Scenario: Create a promotion
   And I should see "{"dollarsOff": 5}" in the "Meta" field
   And I should see "26-Nov-2021 (00:00:00.000000)" in the "Begin date" field
   And the "End date" field should be empty
+
+Scenario: List all promotions
+  When I visit the "Home Page"
+  And I press the "Search" button
+  Then I should be in search mode
+  When I check the "Name" radio
+  And I set the "Name" empty
+  And I press the "Search" button
+  Then I should see "Market Black Friday" in the results
+  And I should see "Amazing Toaster Discount" in the results
+  And I should see "MacBook Pro Discount" in the results
+  And I should see "Grand Theft Auto Trilogy Coupon" in the results
+  And I should see "Chips Ahoy" in the results

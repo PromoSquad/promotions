@@ -107,3 +107,31 @@ def step_impl(context, text_string, element_name):
   element_id = 'input-' + format_as_id(element_name)
   element = context.driver.find_element_by_id(element_id)
   expect(element.get_attribute('value')).to_equal(text_string)
+
+@then('I should be in search mode')
+def step_impl(context):
+  """Radio with id 'radio-name' visible indicates search mode"""
+  found = WebDriverWait(context.driver, context.WAIT_SECONDS).until(
+    expected_conditions.visibility_of_element_located((By.ID, 'radio-name'))
+  )
+  expect(found).to_be_truthy()
+
+@when('I check the "{element_name}" radio')
+def step_impl(context, element_name):
+  element_id = 'radio-' + format_as_id(element_name)
+  element = context.driver.find_element_by_id(element_id)
+  element.click()
+
+@then('I should see "{text_string}" in the results')
+def step_impl(context, text_string):
+  """results are in div with id 'promotion-list'"""
+  found = WebDriverWait(context.driver, context.WAIT_SECONDS).until(
+    expected_conditions.text_to_be_present_in_element( (By.ID, 'promotion-list'), text_string)
+  )
+  expect(found).to_be_truthy()
+
+@then('I should not see "{text_string}" in the results')
+def step_impl(context, text_string):
+  element = context.driver.find_element_by_id('promotion-list')
+  error_msg = "I should not see '{}' in '{}'".format(text_string, element.text)
+  ensure(text_string in element.text, False, error_msg)
