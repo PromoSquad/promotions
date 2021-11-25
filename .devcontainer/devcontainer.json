@@ -5,18 +5,19 @@
   "workspaceFolder": "/app",
   "remoteUser": "devops",
   "extensions": [
-    "VisualVisualStudioExptTeam.vscodeintellicodeStudio",
-    "ms-python.python",
-    "ms-python.vscode-pylance",
-    "wholroyd.jinja",
-    "cstrap.flask-snippets",
-    "yzhang.markdown-all-in-one",
-    "DavidAnson.vscode-markdownlint",
-    "bierner.github-markdown-preview",
-    "donjayamanne.githistory",
-    "redhat.vscode-yaml",
-    "bbenoist.vagrant"
-  ],
+	"VisualVisualStudioExptTeam.vscodeintellicodeStudio",
+	"ms-python.python",
+	"ms-python.vscode-pylance",
+	"wholroyd.jinja",
+	"cstrap.flask-snippets",
+	"yzhang.markdown-all-in-one",
+	"DavidAnson.vscode-markdownlint",
+	"bierner.github-markdown-preview",
+	"donjayamanne.githistory",
+	"redhat.vscode-yaml",
+	"bbenoist.vagrant",
+	"alexkrechik.cucumberautocomplete"
+],
   "forwardPorts": [8080, 5432],
   "postCreateCommand": "sudo pip install -r requirements.txt"
 }
