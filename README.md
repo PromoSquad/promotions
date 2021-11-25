@@ -1,7 +1,7 @@
+# promotions
+
 [![Run Python Tests](https://github.com/PromoSquad/promotions/actions/workflows/test.yml/badge.svg)](https://github.com/PromoSquad/promotions/actions/workflows/test.yml)
 [![codecov](https://codecov.io/gh/PromoSquad/promotions/branch/main/graph/badge.svg?token=C8GU9IMZBE)](https://codecov.io/gh/PromoSquad/promotions)
-
-# promotions
 
 Project Promotions repo for NYU DevOps Fall 2021. A microservice that manages promotion information, leveraging technologies including Flask(Python), PostgreSQL, GitHub Actions and IBM Cloud.
 
