@@ -16,3 +16,48 @@ Scenario: The server is running
   When I visit the "Home Page"
   Then I should see "Promotions RESTful Service Demo" in the title
   And I should not see "404 Not Found"
+
+Scenario: Create a promotion
+  When I visit the "Home Page"
+  And I set the "Name" to "Cheese Burger Coupon"
+  And I set the "Description" to "$5 off on your purchase of cheese burger"
+  And I set the "Product ID" to "20"
+  And I select "Active" in the "Status" dropdown
+  And I select "Coupon" in the "Type" dropdown
+  And I set the "Meta" to "{"dollarsOff": 5}"
+  And I set the "Begin date" to "26-Nov-2021 (00:00:00.000000)"
+  And I set the "End date" empty
+  And I press the "Create" button
+  Then I should see message containing "created successfully"
+  When I copy the Promotion ID in the message to the clipboard
+  And I press the "Reset" button
+  Then the "Promotion ID" field should be empty
+  And the "Name" field should be empty
+  And the "Description" field should be empty
+  And the "Product ID" field should be empty
+  And the "Meta" field should be empty
+  And the "Begin date" field should be empty
+  And the "End date" field should be empty
+  When I paste the "Promotion ID" field
+  And I press the "Retrieve" button
+  Then I should see "Cheese Burger Coupon" in the "Name" field
+  And I should see "$5 off on your purchase of cheese burger" in the "Description" field
+  And I should see "20" in the "Product ID" field
+  And I should see "Active" in the "Status" dropdown
+  And I should see "Coupon" in the "Type" dropdown
+  And I should see "{"dollarsOff": 5}" in the "Meta" field
+  And I should see "26-Nov-2021 (00:00:00.000000)" in the "Begin date" field
+  And the "End date" field should be empty
+
+Scenario: List all promotions
+  When I visit the "Home Page"
+  And I press the "Search" button
+  Then I should be in search mode
+  When I check the "Name" radio
+  And I set the "Name" empty
+  And I press the "Search" button
+  Then I should see "Market Black Friday" in the results
+  And I should see "Amazing Toaster Discount" in the results
+  And I should see "MacBook Pro Discount" in the results
+  And I should see "Grand Theft Auto Trilogy Coupon" in the results
+  And I should see "Chips Ahoy" in the results

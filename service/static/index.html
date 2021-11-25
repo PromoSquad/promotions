@@ -69,6 +69,7 @@
                           <div class="row">
                             <div class="col-sm-6" style="margin-bottom: 10px">
                               <input
+                                id="input-promotion-id"
                                 type="text"
                                 class="form-control"
                                 name="id"
@@ -78,7 +79,7 @@
                             </div>
                             <div class="col-sm-6">
                               <button
-                                id="retrieve-button"
+                                id="button-retrieve"
                                 type="button"
                                 class="btn btn-primary"
                                 @click="onRetrieveButtonClick"
@@ -86,7 +87,7 @@
                                 Retrieve
                               </button>
                               <button
-                                id="delete-button"
+                                id="button-delete"
                                 type="button"
                                 class="btn btn-danger"
                                 style="margin-left: 5px"
@@ -95,7 +96,7 @@
                                 Delete
                               </button>
                               <button
-                                id="activate-button"
+                                id="button-activate"
                                 type="button"
                                 class="btn btn-light"
                                 style="margin-left: 5px"
@@ -104,7 +105,7 @@
                                 Activate
                               </button>
                               <button
-                                id="deactivate-button"
+                                id="button-deactivate"
                                 type="button"
                                 class="btn btn-light"
                                 style="margin-left: 5px"
@@ -124,6 +125,7 @@
               <div id="search-section">
                 <div class="row search-header" v-if="searchMode">
                   <button
+                    id="button-back-from-search"
                     type="button"
                     class="btn btn-light"
                     id="back-from-search-button"
@@ -138,6 +140,7 @@
                     <div class="form-item">
                       <div class="label" @click="onSearchRadioClick('name')">
                         <input
+                          id="radio-name"
                           class="form-check-input"
                           type="radio"
                           name="flexRadioDefault"
@@ -148,6 +151,7 @@
                       </div>
                       <div class="input">
                         <input
+                          id="input-name"
                           type="text"
                           class="form-control"
                           name="name"
@@ -164,6 +168,7 @@
                         @click="onSearchRadioClick('product_id')"
                       >
                         <input
+                          id="radio-product-id"
                           class="form-check-input"
                           type="radio"
                           name="flexRadioDefault"
@@ -174,6 +179,7 @@
                       </div>
                       <div class="input">
                         <input
+                          id="input-product-id"
                           type="text"
                           class="form-control"
                           name="productId"
@@ -187,6 +193,7 @@
                     <div class="form-item">
                       <div class="label" @click="onSearchRadioClick('status')">
                         <input
+                          id="radio-status"
                           class="form-check-input"
                           type="radio"
                           name="flexRadioDefault"
@@ -197,6 +204,7 @@
                       </div>
                       <div class="input">
                         <select
+                          id="select-status"
                           class="form-select"
                           name="status"
                           v-model="input.status"
@@ -211,6 +219,7 @@
                 </div>
                 <div class="row" style="padding: 0 10px 10px 10px">
                   <button
+                    id="button-search"
                     type="button"
                     class="btn btn-primary"
                     @click="onSearchButtonClick"
@@ -231,6 +240,7 @@
                       <div class="label">Description</div>
                       <div class="input">
                         <input
+                          id="input-description"
                           type="text"
                           class="form-control"
                           name="description"
@@ -246,6 +256,7 @@
                         <div class="label">Type</div>
                         <div class="input">
                           <select
+                            id="select-type"
                             class="form-select"
                             name="type"
                             v-model="input.type"
@@ -264,6 +275,7 @@
                         <div class="label">Meta</div>
                         <div class="input">
                           <input
+                            id="input-meta"
                             type="text"
                             class="form-control"
                             name="meta"
@@ -280,6 +292,7 @@
                         <div class="label">Begin date</div>
                         <div class="input">
                           <input
+                            id="input-begin-date"
                             type="text"
                             class="form-control"
                             name="beginDate"
@@ -294,6 +307,7 @@
                         <div class="label">End date</div>
                         <div class="input">
                           <input
+                            id="input-end-date"
                             type="text"
                             class="form-control"
                             name="endDate"
@@ -310,6 +324,7 @@
                   >
                     <div class="col-auto">
                       <button
+                        id="button-create"
                         type="button"
                         class="btn btn-primary"
                         @click="onCreateButtonClick"
@@ -319,6 +334,7 @@
                     </div>
                     <div class="col-auto">
                       <button
+                        id="button-update"
                         type="button"
                         class="btn btn-success"
                         @click="onUpdateButtonClick"
@@ -328,6 +344,7 @@
                     </div>
                     <div class="col-auto">
                       <button
+                        id="button-fill-with-sample"
                         type="button"
                         class="btn btn-light"
                         @click="onFillWithSampleButtonClick"
@@ -337,6 +354,7 @@
                     </div>
                     <div class="col-auto">
                       <button
+                        id="button-reset"
                         type="button"
                         class="btn btn-light"
                         @click="onResetButtonClick"
@@ -353,7 +371,7 @@
       </div>
       <div class="body">
         <div class="content container" style="padding: 30px 0">
-          <div class="row g-3">
+          <div class="row g-3" id="promotion-list">
             <div class="col-sm-6 col-md-4" v-for="promotion in promotions">
               <div class="card promotion-card">
                 <div class="card-body">
