@@ -67,7 +67,7 @@ class Promotion(db.Model):
 
   def deserialize(self, data: dict):
     try:
-      if "product_id" in data and data["product_id"] != None:
+      if "product_id" in data and data["product_id"]:
         try:
           self.product_id = int(data["product_id"])
         except ValueError:
@@ -82,7 +82,7 @@ class Promotion(db.Model):
       if type not in [t.value for t in PromotionType]:
         raise AttributeError("unknown type `%s`" % (type))
       self.type = PromotionType(type)
-      if "description" in data and data["description"] != None:
+      if "description" in data and data["description"]:
         self.description = str(data["description"])
       else:
         self.description = None
@@ -107,7 +107,7 @@ class Promotion(db.Model):
         self.begin_date = datetime.strptime(data["begin_date"], datetimeFormat)
       except ValueError:
         raise AttributeError("malformed begin_date")
-      if "end_date" in data and data["end_date"] != None:
+      if "end_date" in data and data["end_date"]:
         try:
           self.end_date = datetime.strptime(data["end_date"], datetimeFormat)
         except ValueError:
