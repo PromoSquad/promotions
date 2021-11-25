@@ -45,7 +45,7 @@ This is with auto-reloader and debugger on. `--reload` enables auto-reloader so 
 ### Start in production mode
 
 ```bash
-ex
+PORT=8080 honcho start
 ```
 
 ### Run TDD tests
