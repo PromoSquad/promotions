@@ -32,7 +32,7 @@ vagrant destroy
 
 ## App
 
-The port for our Flask service is `8080`, which is already mapped to host by our vagrant configuration. After starting the server, visit http://localhost:8080/ on your host.
+The port for our Flask service is `8080`, which is already mapped to host by our vagrant configuration. After starting the server, visit <http://localhost:8080/> on your host.
 
 ### Start in dev mode
 

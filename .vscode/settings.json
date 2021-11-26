@@ -8,5 +8,17 @@
   "files.eol": "\n",
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
-  "cSpell.words": ["bogo"]
+  "cSpell.words": [
+    "apidocs",
+    "apikey",
+    "bluemix",
+    "bogo",
+    "codecov",
+    "CSCI",
+    "ibmcloud",
+    "jsonify",
+    "nosetests",
+    "restx",
+    "Rofrano"
+  ]
 }
