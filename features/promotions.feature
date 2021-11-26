@@ -40,7 +40,8 @@ Scenario: Create a promotion
   And the "End date" field should be empty
   When I paste the "Promotion ID" field
   And I press the "Retrieve" button
-  Then I should see "Cheese Burger Coupon" in the "Name" field
+  Then I should see message containing "retrieved successfully"
+  And I should see "Cheese Burger Coupon" in the "Name" field
   And I should see "$5 off on your purchase of cheese burger" in the "Description" field
   And I should see "20" in the "Product ID" field
   And I should see "Active" in the "Status" dropdown
