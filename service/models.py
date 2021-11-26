@@ -4,7 +4,7 @@ from enum import Enum
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import func
-from sqlalchemy.exc import SQLAlchemyError
+from sqlalchemy.exc import OperationalError, SQLAlchemyError
 import json
 
 logger = logging.getLogger("flask.app")
@@ -131,12 +131,12 @@ class Promotion(db.Model):
     cls.app = app
     try:
       db.init_app(app)
-    except SQLAlchemyError as error:
-      error_msg = "Error initializing database: " + error.args[0]
+      app.app_context().push()
+      db.create_all()
+    except:
+      error_msg = "Error initializing database"
       logger.error(error_msg)
       raise DatabaseConnectionError(error_msg)
-    app.app_context().push()
-    db.create_all()
 
   @classmethod
   def all(cls):
