@@ -3,7 +3,7 @@
 [![Run Python Tests](https://github.com/PromoSquad/promotions/actions/workflows/test.yml/badge.svg)](https://github.com/PromoSquad/promotions/actions/workflows/test.yml)
 [![codecov](https://codecov.io/gh/PromoSquad/promotions/branch/main/graph/badge.svg?token=C8GU9IMZBE)](https://codecov.io/gh/PromoSquad/promotions)
 
-Project Promotions repo for NYU DevOps Fall 2021. A microservice that manages promotion information, leveraging technologies including Flask(Python), PostgreSQL, GitHub Actions and IBM Cloud.
+Project Promotions repo for NYU DevOps Fall 2021. A microservice that manages promotion information, leveraging technologies including Flask(Python), Swagger, PostgreSQL, GitHub Actions and IBM Cloud.
 
 ## About
 
@@ -15,9 +15,11 @@ For instructions for developers, please refer to [CONTRIBUTING.md](./CONTRIBUTIN
 
 ## Running on IBM Cloud
 
-The service is deployed on IBM Cloud. You can visit it at [https://nyu-promotion-service-fall2103.us-south.cf.appdomain.cloud/](https://nyu-promotion-service-fall2103.us-south.cf.appdomain.cloud/).
+The service is deployed on IBM Cloud. You can visit it at:
 
-## Run Service by Honcho
+- Dev: [https://nyu-promotion-service-fall2103.us-south.cf.appdomain.cloud/](https://nyu-promotion-service-fall2103.us-south.cf.appdomain.cloud/)
+
+## Run locally by Honcho
 
 Make sure you have Python 3.8+ and [requirements.txt](./requirements.txt) installed. Then, run the following command:
 
@@ -25,194 +27,11 @@ Make sure you have Python 3.8+ and [requirements.txt](./requirements.txt) instal
 PORT=8080 honcho start
 ```
 
-## Service RESTful API Routes
+## Service API Docs
 
-### List all promotions
+This service is built with [Swagger](https://swagger.io/), which is a specification language for describing RESTful APIs.
 
-`GET /promotions`
-
-Example response:
-
-```jsonc
-[
-  {
-    "id": 1,
-    "product_id": 4,
-    "name": "Amazing",
-    "type": "coupon",
-    "description": "Amazing $10 coupon for toasters",
-    "meta": "{\"dollarsOff\":10}",
-    "begin_date": "18-Nov-2018 (08:34:58.674035)",
-    "end_date": null,
-    "active": true
-  }
-  // ...
-]
-```
-
-### List all active/inactive promotions
-
-`GET /promotions?status=(active|inactive)`
-
-Example response:
-
-```jsonc
-[
-  {
-    "id": 1,
-    "product_id": 4,
-    "name": "Amazing",
-    "type": "coupon",
-    "description": "Amazing $10 coupon for toasters",
-    "meta": "{\"dollarsOff\":10}",
-    "begin_date": "18-Nov-2018 (08:34:58.674035)",
-    "end_date": null,
-    "active": true
-  }
-  // ...
-]
-```
-
-### List all promotions related to a product
-
-`GET /promotions?productId=4`
-
-Example response:
-
-```jsonc
-[
-  {
-    "id": 1,
-    "product_id": 4,
-    "name": "Amazing",
-    "type": "coupon",
-    "description": "Amazing $10 coupon for toasters",
-    "meta": "{\"dollarsOff\":10}",
-    "begin_date": "18-Nov-2018 (08:34:58.674035)",
-    "end_date": null,
-    "active": true
-  }
-  // ...
-]
-```
-
-### Get one promotion
-
-`GET /promotions/{id}`
-
-Example response:
-
-```jsonc
-{
-  "id": 1,
-  "product_id": 4,
-  "name": "Amazing",
-  "type": "coupon",
-  "description": "Amazing $10 coupon for toasters",
-  "meta": "{\"dollarsOff\":10}",
-  "begin_date": "18-Nov-2018 (08:34:58.674035)",
-  "end_date": null,
-  "active": true
-}
-```
-
-### Create a promotion
-
-`POST /promotions`
-
-Example Request:
-
-```jsonc
-{
-  "product_id": 4,
-  "name": "Amazing",
-  "type": "coupon",
-  "description": "Amazing $10 coupon for toasters",
-  "meta": "{\"dollarsOff\":10}",
-  "begin_date": "18-Nov-2018 (08:34:58.674035)",
-  "end_date": null,
-  "active": true
-}
-```
-
-Example Response:
-
-```jsonc
-// Location: http://localhost:8080/promotions/1
-{
-  "id": 1,
-  "product_id": 4,
-  "name": "Amazing",
-  "type": "coupon",
-  "description": "Amazing $10 coupon for toasters",
-  "meta": "{\"dollarsOff\":10}",
-  "begin_date": "18-Nov-2018 (08:34:58.674035)",
-  "end_date": null,
-  "active": true
-}
-```
-
-### Update one promotion
-
-`PUT /promotions/{id}`
-
-Example Request:
-
-```jsonc
-{
-  "id": 1,
-  "product_id": 4,
-  "name": "Amazing",
-  "type": "coupon",
-  "description": "Amazing $10 coupon for toasters",
-  "meta": "{\"dollarsOff\":10}",
-  "begin_date": "18-Nov-2018 (08:34:58.674035)",
-  "end_date": null,
-  "active": true
-}
-```
-
-Example Response:
-
-```jsonc
-{
-  "id": 1,
-  "product_id": 4,
-  "name": "Amazing",
-  "type": "coupon",
-  "description": "Amazing $10 coupon for toasters",
-  "meta": "{\"dollarsOff\":10}",
-  "begin_date": "18-Nov-2018 (08:34:58.674035)",
-  "end_date": null,
-  "active": true
-}
-```
-
-### Activate/Deactivate one promotion
-
-`PUT /promotions/{id}/(activate|deactivate)`
-
-Example Response:
-
-```jsonc
-{
-  "id": 1,
-  "product_id": 4,
-  "name": "Amazing",
-  "type": "coupon",
-  "description": "Amazing $10 coupon for toasters",
-  "meta": "{\"dollarsOff\":10}",
-  "begin_date": "18-Nov-2018 (08:34:58.674035)",
-  "end_date": null,
-  "active": true // or false
-}
-```
-
-### Delete one promotion
-
-`DELETE /promotions/{id}`
-
-Response: 204 No Content
+The service API documentation is auto-generated by Swagger and available at path [/apidocs](https://nyu-promotion-service-fall2103.us-south.cf.appdomain.cloud/apidocs) of the service.
 
 ## License
 

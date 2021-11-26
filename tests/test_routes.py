@@ -2,7 +2,7 @@ import os
 import logging
 import unittest
 from service import status
-from service.models import Promotion, db, datetimeFormat
+from service.models import db, datetimeFormat
 from service.routes import app, init_db
 from .factories import PromotionFactory
 
@@ -11,7 +11,6 @@ DATABASE_URI = os.getenv(
 )
 
 BASE_URL = '/promotions'
-
 
 class TestPromotionServer(unittest.TestCase):
     """ Promotion Server Tests """
@@ -95,18 +94,18 @@ class TestPromotionServer(unittest.TestCase):
         for promotion in data:
             self.assertEqual(promotion["active"], True)
 
-    def test_query_promotion_list_by_productId(self):
+    def test_query_promotion_list_by_product_id(self):
         promotions = self._create_promotions(20)
-        test_productId = promotions[0].product_id
-        productId_promotions = [p for p in promotions if p.product_id == test_productId]
+        test_product_id = promotions[0].product_id
+        product_id_promotions = [p for p in promotions if p.product_id == test_product_id]
         resp = self.app.get(
-            BASE_URL, query_string="productId={}".format(str(test_productId))
+            BASE_URL, query_string="product_id={}".format(str(test_product_id))
         )
         self.assertEqual(resp.status_code, status.HTTP_200_OK)
         data = resp.get_json()
-        self.assertEqual(len(data), len(productId_promotions))
+        self.assertEqual(len(data), len(product_id_promotions))
         for promotion in data:
-            self.assertEqual(promotion["product_id"], test_productId)
+            self.assertEqual(promotion["product_id"], test_product_id)
 
     def test_get_promotion(self):
         test_promotion = self._create_promotions(1)[0]
@@ -152,14 +151,6 @@ class TestPromotionServer(unittest.TestCase):
         if "end_date" in new_promotion and new_promotion["end_date"] != None:
             self.assertEqual(new_promotion["end_date"], test_promotion.begin_date.strftime(datetimeFormat))
         self.assertEqual(new_promotion["active"], test_promotion.active)
-
-    def test_create_promotion_with_wrong_content_type(self):
-        test_promotion = PromotionFactory()
-        logging.debug(test_promotion)
-        resp = self.app.post(
-            BASE_URL, json=test_promotion.serialize(), content_type="application/text"
-        )
-        self.assertEqual(resp.status_code, status.HTTP_415_UNSUPPORTED_MEDIA_TYPE)
 
     def test_create_promotion_with_no_data(self):
         resp = self.app.post(

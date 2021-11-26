@@ -260,7 +260,7 @@ class TestPromotionModel(unittest.TestCase):
         promotions = Promotion.find_by_status(False)
         self.assertEqual(len(promotions), 1)
 
-    def test_find_by_productID(self):
+    def test_find_by_product_id(self):
         data1 = {
             "product_id": 5,
             "name": "amazing",
@@ -295,9 +295,9 @@ class TestPromotionModel(unittest.TestCase):
         promotion2.deserialize(data2).create()
         promotion3 = Promotion()
         promotion3.deserialize(data3).create()
-        promotions = Promotion.find_by_productId(5)
+        promotions = Promotion.find_by_product_id(5)
         self.assertEqual(len(promotions), 2)
         self.assertEqual(promotions[0].id, promotion1.id)
         self.assertEqual(promotions[1].id, promotion2.id)
-        promotions = Promotion.find_by_productId(2)
+        promotions = Promotion.find_by_product_id(2)
         self.assertEqual(len(promotions), 1)

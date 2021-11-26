@@ -5,7 +5,7 @@ from flask import Flask
 app = Flask(__name__, static_url_path='', static_folder='static')
 app.config.from_object("config")
 
-from service import routes, models, error_handlers
+from service import routes
 
 print(f"Setting log level to {logging.INFO}")
 app.logger.setLevel(logging.INFO)

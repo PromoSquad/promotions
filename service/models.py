@@ -4,6 +4,7 @@ from enum import Enum
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import func
+from sqlalchemy.exc import OperationalError, SQLAlchemyError
 import json
 
 logger = logging.getLogger("flask.app")
@@ -11,6 +12,9 @@ logger = logging.getLogger("flask.app")
 db = SQLAlchemy()
 
 datetimeFormat = "%d-%b-%Y (%H:%M:%S.%f)"
+
+class DatabaseConnectionError(Exception):
+    """Custom Exception when database connection fails"""
 
 class DataValidationError(Exception):
     """ Used for an data validation errors when deserializing """
@@ -125,9 +129,14 @@ class Promotion(db.Model):
   def init_db(cls, app: Flask):
     logger.info("Initializing database")
     cls.app = app
-    db.init_app(app)
-    app.app_context().push()
-    db.create_all()
+    try:
+      db.init_app(app)
+      app.app_context().push()
+      db.create_all()
+    except:
+      error_msg = "Error initializing database"
+      logger.error(error_msg)
+      raise DatabaseConnectionError(error_msg)
 
   @classmethod
   def all(cls):
@@ -145,12 +154,12 @@ class Promotion(db.Model):
     return cls.query.filter_by(name=name).all()
 
   @classmethod
-  def find_by_productId(cls, productId: int):
+  def find_by_product_id(cls, product_id: int):
     """Returns all Promotions with the given product_id
     Args:
         product_id (int): the product_id of the Promotions you want to match """
-    logger.info("Processing product_id query for %s ...", productId)
-    return cls.query.filter_by(product_id=productId).all()
+    logger.info("Processing product_id query for %s ...", product_id)
+    return cls.query.filter_by(product_id=product_id).all()
 
   @classmethod
   def find_by_status(cls, status: bool):

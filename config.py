@@ -2,13 +2,11 @@
 Global Configuration for Application
 """
 import os
-import json
 
 # Get configuration from environment
 DATABASE_URI = os.getenv(
     "DATABASE_URI", "postgres://postgres:postgres@localhost:5432/postgres"
 )
-
 
 # Configure SQLAlchemy
 SQLALCHEMY_DATABASE_URI = DATABASE_URI
