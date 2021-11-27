@@ -77,6 +77,11 @@ def step_impl(context):
   id = result.group(2)
   context.clipboard = id
 
+@when('I copy the first Promotion ID to the clipboard')
+def step_impl(context):
+  expect('first_id' in context).to_be_truthy()
+  context.clipboard = context.first_id
+
 @when('I paste the "{element_name}" field')
 def step_impl(context, element_name):
   element_id = 'input-' + format_as_id(element_name)
