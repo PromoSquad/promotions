@@ -62,3 +62,36 @@ Scenario: List all promotions
   And I should see "MacBook Pro Discount" in the results
   And I should see "Grand Theft Auto Trilogy Coupon" in the results
   And I should see "Chips Ahoy" in the results
+
+Scenario: Read a promotion
+  When I visit the "Home Page"
+  And I set the "Name" to "Cheese Burger Coupon2"
+  And I set the "Description" to "$10 off on your purchase of cheese burger"
+  And I set the "Product ID" to "33"
+  And I select "Active" in the "Status" dropdown
+  And I select "Coupon" in the "Type" dropdown
+  And I set the "Meta" to "{"dollarsOff": 10}"
+  And I set the "Begin date" to "22-Nov-2021 (00:00:00.000000)"
+  And I set the "End date" empty
+  And I press the "Create" button
+  Then I should see message containing "created successfully"
+  When I copy the Promotion ID in the message to the clipboard
+  And I press the "Reset" button
+  Then the "Promotion ID" field should be empty
+  And the "Name" field should be empty
+  And the "Description" field should be empty
+  And the "Product ID" field should be empty
+  And the "Meta" field should be empty
+  And the "Begin date" field should be empty
+  And the "End date" field should be empty
+  When I paste the "Promotion ID" field
+  And I press the "Retrieve" button
+  Then I should see message containing "retrieved successfully"
+  And I should see "Cheese Burger Coupon2" in the "Name" field
+  And I should see "$10 off on your purchase of cheese burger" in the "Description" field
+  And I should see "33" in the "Product ID" field
+  And I should see "Active" in the "Status" dropdown
+  And I should see "Coupon" in the "Type" dropdown
+  And I should see "{"dollarsOff": 10}" in the "Meta" field
+  And I should see "22-Nov-2021 (00:00:00.000000)" in the "Begin date" field
+  And the "End date" field should be empty
