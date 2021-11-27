@@ -62,3 +62,16 @@ Scenario: List all promotions
   And I should see "MacBook Pro Discount" in the results
   And I should see "Grand Theft Auto Trilogy Coupon" in the results
   And I should see "Chips Ahoy" in the results
+
+Scenario: Query promotions by Product ID
+  When I visit the "Home Page"
+  And I set the "Name" empty
+  And I set the "Product ID" to "15"
+  Then the "Name" field should be empty
+  When I press the "Search" button
+  Then I should be in search mode
+  And I should see "Amazing Toaster Discount" in the results
+  And I should not see "MacBook Pro Discount" in the results
+  And I should not see "Market Black Friday" in the results
+  And I should not see "Grand Theft Auto Trilogy Coupon" in the results
+  And I should not see "Chips Ahoy" in the results
