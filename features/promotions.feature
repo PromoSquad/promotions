@@ -114,3 +114,55 @@ Scenario: Delete a promotion
   When  I paste the "Promotion ID" field
   And I press the "Retrieve" button
   Then I should see message containing "not found"
+
+Scenario: Activate a Promotion
+  When I visit the "Home Page"
+  And I press the "Search" button
+  Then I should be in search mode
+  And I should see "Cheese Burger Coupon" in the results
+  And I should see "MacBook Pro Discount" in the results
+  And I should see "Grand Theft Auto Trilogy Coupon" in the results
+  And I should see "Chips Ahoy" in the results
+  When I select "Status" button
+  And I select "Inactive" in the "Status" dropdown
+  And I press the "Search" button
+  Then I should see "Amazing Toaster Discount" in the results
+  When I copy the Promotion ID to the clipboard
+  And I visit the "Home Page"
+  And I paste the "Promotion ID" field
+  And I press the "Retrieve" button
+  Then I should see message containing "retrieved successfully"
+  When I press the "Activate" button
+  Then I should see message containing "activated successfully"
+  When I press the "Reset" button
+  And I select "Active" in the "Status" dropdown
+  And I press the "Search" button
+  Then I should be in search mode
+  And I should see "Cheese Burger Coupon" in the results
+  And I should see "Amazing Toaster Discount" in the results
+  And I should see "MacBook Pro Discount" in the results
+  And I should see "Grand Theft Auto Trilogy Coupon" in the results
+  And I should see "Chips Ahoy" in the results
+
+Scenario: Deactivate a Promotion
+  When I visit the "Home Page"
+  And I select "Active" in the "Status" dropdown
+  And I press the "Search" button
+  Then I should be in search mode
+  And I should see "Cheese Burger Coupon" in the results
+  And I should see "Amazing Toaster Discount" in the results
+  And I should see "MacBook Pro Discount" in the results
+  And I should see "Grand Theft Auto Trilogy Coupon" in the results
+  And I should see "Chips Ahoy" in the results
+  When I copy the Promotion ID of "Amazing Toaster Discount" to the clipboard
+  And I visit the "Home Page"
+  And I paste the "Promotion ID" field
+  And I press the "Retrieve" button
+  Then I should see message containing "retrieved successfully"
+  When I press the "Deactivate" button
+  Then I should see message containing "deactivated successfully"
+  When I press the "Reset" button
+  And I select "Inactive" in the "Status" dropdown
+  And I press the "Search" button
+  Then I should be in search mode
+  And I should see "Amazing Toaster Discount" in the results
