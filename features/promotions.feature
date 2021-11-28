@@ -75,3 +75,20 @@ Scenario: Query promotions by Product ID
   And I should not see "Market Black Friday" in the results
   And I should not see "Grand Theft Auto Trilogy Coupon" in the results
   And I should not see "Chips Ahoy" in the results
+
+Scenario: Read a promotion
+  When I visit the "Home Page"
+  And I set the "Promotion ID" empty
+  And I copy the #1 Promotion ID to the clipboard
+  Then the "Promotion ID" field should be empty
+  When I paste the "Promotion ID" field
+  And I press the "Retrieve" but
+  Then I should see message containing "retrieved successfully"
+  And I should see "Market Black Friday" in the "Name" field
+  And I should see "Amazing 20% discount on all purchases on Black Friday" in the "Description" field
+  And the "Product ID" field should be empty
+  And I should see "Active" in the "Status" dropdown
+  And I should see "Percentage" in the "Type" dropdown
+  And I should see "{"percentOff": 0.2}" in the "Meta" field
+  And I should see "26-Nov-2021 (00:00:00.000000)" in the "Begin date" field
+  And I should see "27-Nov-2021 (00:00:00.000000)" in the "End date" field
