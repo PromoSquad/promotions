@@ -82,7 +82,7 @@ Scenario: Read a promotion
   And I copy the #1 Promotion ID to the clipboard
   Then the "Promotion ID" field should be empty
   When I paste the "Promotion ID" field
-  And I press the "Retrieve" but
+  And I press the "Retrieve" button
   Then I should see message containing "retrieved successfully"
   And I should see "Market Black Friday" in the "Name" field
   And I should see "Amazing 20% discount on all purchases on Black Friday" in the "Description" field
