@@ -114,4 +114,3 @@ Scenario: Delete a promotion
   When  I paste the "Promotion ID" field
   And I press the "Retrieve" button
   Then I should see message containing "not found"
-
