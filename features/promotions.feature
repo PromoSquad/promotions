@@ -63,6 +63,26 @@ Scenario: List all promotions
   And I should see "Grand Theft Auto Trilogy Coupon" in the results
   And I should see "Chips Ahoy" in the results
 
+Scenario: Query promotions by status
+  When I visit the "Home Page"
+  And I press the "Search" button
+  Then I should be in search mode
+  When I check the "Status" radio
+  And I select "Active" in the "Status" dropdown
+  And I press the "Search" button
+  Then I should see "Market Black Friday" in the results
+  And I should see "MacBook Pro Discount" in the results
+  And I should see "Grand Theft Auto Trilogy Coupon" in the results
+  And I should see "Chips Ahoy" in the results
+  And I should not see "Amazing Toaster Discount" in the results
+  When I select "Inactive" in the "Status" dropdown
+  And I press the "Search" button
+  Then I should see "Amazing Toaster Discount" in the results
+  And I should not see "Market Black Friday" in the results
+  And I should not see "MacBook Pro Discount" in the results
+  And I should not see "Grand Theft Auto Trilogy Coupon" in the results
+  And I should not see "Chips Ahoy" in the results
+
 Scenario: Query promotions by Product ID
   When I visit the "Home Page"
   And I set the "Name" empty
