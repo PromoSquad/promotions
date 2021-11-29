@@ -114,3 +114,35 @@ Scenario: Delete a promotion
   When  I paste the "Promotion ID" field
   And I press the "Retrieve" button
   Then I should see message containing "not found"
+
+Scenario: Activate a Promotion
+  When I visit the "Home Page"
+  And I set the "Promotion ID" empty
+  And I copy the #2 Promotion ID to the clipboard
+  Then the "Promotion ID" field should be empty
+  When I paste the "Promotion ID" field
+  And I press the "Retrieve" button
+  Then I should see message containing "retrieved successfully"
+  And I should see "Amazing Toaster Discount" in the "Name" field
+  And I should see "Inactive" in the "Status" dropdown
+  When I press the "Activate" button
+  Then I should see message containing "activated successfully"
+  When I press the "Retrieve" button
+  Then I should see message containing "retrieved successfully"
+  And I should see "Active" in the "Status" dropdown
+
+Scenario: Deactivate a Promotion
+  When I visit the "Home Page"
+  And I set the "Promotion ID" empty
+  And I copy the #1 Promotion ID to the clipboard
+  Then the "Promotion ID" field should be empty
+  When I paste the "Promotion ID" field
+  And I press the "Retrieve" button
+  Then I should see message containing "retrieved successfully"
+  And I should see "Market Black Friday" in the "Name" field
+  And I should see "Active" in the "Status" dropdown
+  When I press the "Deactivate" button
+  Then I should see message containing "deactivated successfully"
+  When I press the "Retrieve" button
+  Then I should see message containing "retrieved successfully"
+  And I should see "Inactive" in the "Status" dropdown
