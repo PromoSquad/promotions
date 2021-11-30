@@ -113,6 +113,47 @@ Scenario: Read a promotion
   And I should see "26-Nov-2021 (00:00:00.000000)" in the "Begin date" field
   And I should see "27-Nov-2021 (00:00:00.000000)" in the "End date" field
 
+Scenario: Update a promotion
+  When I visit the "Home Page"
+  And I set the "Promotion ID" empty
+  And I copy the #1 Promotion ID to the clipboard
+  Then the "Promotion ID" field should be empty
+  When I paste the "Promotion ID" field
+  And I press the "Retrieve" button
+  Then I should see message containing "retrieved successfully"
+  And I should see "Market Black Friday" in the "Name" field
+  And I should see "Amazing 20% discount on all purchases on Black Friday" in the "Description" field
+  And the "Product ID" field should be empty
+  And I should see "Active" in the "Status" dropdown
+  And I should see "Percentage" in the "Type" dropdown
+  And I should see "{"percentOff": 0.2}" in the "Meta" field
+  And I should see "26-Nov-2021 (00:00:00.000000)" in the "Begin date" field
+  And I should see "27-Nov-2021 (00:00:00.000000)" in the "End date" field
+  When I set the "Description" to "Amazing $200 discount on all purchases on Black Friday"
+  And I select "Coupon" in the "Type" dropdown
+  And I set the "Meta" to "{"dollarsOff": 200}"
+  And I press the "Update" button
+  Then I should see message containing "updated successfully"
+  When I press the "Reset" button
+  Then the "Promotion ID" field should be empty
+  And the "Name" field should be empty
+  And the "Description" field should be empty
+  And the "Product ID" field should be empty
+  And the "Meta" field should be empty
+  And the "Begin date" field should be empty
+  And the "End date" field should be empty
+  When I paste the "Promotion ID" field
+  And I press the "Retrieve" button
+  Then I should see message containing "retrieved successfully"
+  And I should see "Market Black Friday" in the "Name" field
+  And I should see "Amazing $200 discount on all purchases on Black Friday" in the "Description" field
+  And the "Product ID" field should be empty
+  And I should see "Active" in the "Status" dropdown
+  And I should see "Coupon" in the "Type" dropdown
+  And I should see "{"dollarsOff": 200}" in the "Meta" field
+  And I should see "26-Nov-2021 (00:00:00.000000)" in the "Begin date" field
+  And I should see "27-Nov-2021 (00:00:00.000000)" in the "End date" field
+
 Scenario: Delete a promotion
   When I visit the "Home Page"
   And I set the "Promotion ID" empty
