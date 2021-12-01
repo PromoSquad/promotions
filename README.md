@@ -1,7 +1,12 @@
-# promotions
+<p align="center"><a href="https://nyu-promotion-service-fall2103.us-south.cf.appdomain.cloud/" target="_blank" rel="noopener noreferrer"><img width="400" src="https://raw.githubusercontent.com/PromoSquad/static/main/images/promo_logo_full_114.png" alt="Promotions logo"></a></p>
 
-[![Run Python Tests](https://github.com/PromoSquad/promotions/actions/workflows/test.yml/badge.svg)](https://github.com/PromoSquad/promotions/actions/workflows/test.yml)
-[![codecov](https://codecov.io/gh/PromoSquad/promotions/branch/main/graph/badge.svg?token=C8GU9IMZBE)](https://codecov.io/gh/PromoSquad/promotions)
+<p align="center">
+  <a href="https://github.com/PromoSquad/promotions/actions/workflows/test.yml"><img src="https://github.com/PromoSquad/promotions/actions/workflows/test.yml/badge.svg" alt="Run Python Tests"></a>
+  <a href="https://codecov.io/gh/PromoSquad/promotions"><img src="https://codecov.io/gh/PromoSquad/promotions/branch/main/graph/badge.svg?token=C8GU9IMZBE" alt="codecov"></a>
+  <a href="https://github.com/PromoSquad/promotions"><img src="https://img.shields.io/github/license/PromoSquad/promotions" alt="License"></a>
+</p>
+
+
 
 Project Promotions repo for NYU DevOps Fall 2021. A microservice that manages promotion information, leveraging technologies including Flask(Python), Swagger, PostgreSQL, GitHub Actions and IBM Cloud.
 
