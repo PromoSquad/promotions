@@ -2,7 +2,8 @@
 
 <p align="center">
   <a href="https://github.com/PromoSquad/promotions/actions/workflows/test.yml"><img src="https://github.com/PromoSquad/promotions/actions/workflows/test.yml/badge.svg" alt="Run Python Tests"></a>
-  <a href="https://codecov.io/gh/PromoSquad/promotions"><img src="https://codecov.io/gh/PromoSquad/promotions/branch/main/graph/badge.svg?token=C8GU9IMZBE" alt="codecov"></a>
+  <a href="https://codecov.io/gh/PromoSquad/promotions" target="_blank"><img src="https://codecov.io/gh/PromoSquad/promotions/branch/main/graph/badge.svg?token=C8GU9IMZBE" alt="codecov"></a>
+  <a href="https://nyu-promotion-service-fall2103.us-south.cf.appdomain.cloud/apidocs" target="_blank"><img src="https://img.shields.io/badge/docs-available-green" alt="docs"></a>
   <a href="https://github.com/PromoSquad/promotions/blob/main/LICENSE"><img src="https://img.shields.io/github/license/PromoSquad/promotions" alt="License"></a>
 </p>
 
