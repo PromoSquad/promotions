@@ -43,6 +43,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          sudo apt-get install -y python3-selenium
           python -m pip install --upgrade pip wheel
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
@@ -50,6 +51,9 @@ jobs:
         run: nosetests
         env:
           DATABASE_URI: "postgres://postgres:postgres@postgres:5432/testdb"
+
+      - name: Run BDD tests
+        run: PORT=8080 honcho start & (sleep 2 && behave)
 
       - name: Upload code coverage
         uses: codecov/codecov-action@v2
