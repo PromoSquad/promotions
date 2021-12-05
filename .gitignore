@@ -12,6 +12,9 @@ __pycache__/
 # dotenv
 .env
 
+# auto-generated
+/manifest.yml
+
 *.log
 .coverage
 coverage.xml
