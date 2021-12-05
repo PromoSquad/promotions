@@ -81,7 +81,26 @@ ibmcloud target --cf -o yk2494@nyu.edu -s dev
 ibmcloud cf apps
 ```
 
+### Generate `manifest.yml` for deployment
+
+For dev environment:
+
+```bash
+APP_NAME=nyu-promotion-service-fall2103-dev python scripts/manifest.py
+
+# or simply: (because this app name is the default)
+python scripts/manifest.py
+```
+
+For prod environment:
+
+```bash
+APP_NAME=nyu-promotion-service-fall2103 python scripts/manifest.py
+```
+
 ### Deploy
+
+Make you have the right `manifest.yml` file existing in the root folder, then run:
 
 ```bash
 ibmcloud cf push
