@@ -72,7 +72,11 @@ behave
 
 ```bash
 ibmcloud login -a https://cloud.ibm.com --apikey @~/.bluemix/apikey.json -r us-south
+
+# target dev resource
 ibmcloud target --cf -o yk2494@nyu.edu -s dev
+# or target prod resource
+ibmcloud target --cf -o yk2494@nyu.edu -s prod
 ```
 
 ### List Cloud Foundry apps

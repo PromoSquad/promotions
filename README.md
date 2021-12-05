@@ -7,8 +7,6 @@
   <a href="https://github.com/PromoSquad/promotions/blob/main/LICENSE"><img src="https://img.shields.io/github/license/PromoSquad/promotions" alt="License"></a>
 </p>
 
-
-
 Project Promotions repo for NYU DevOps Fall 2021. A microservice that manages promotion information, leveraging technologies including Flask(Python), Swagger, PostgreSQL, GitHub Actions and IBM Cloud.
 
 ## About
@@ -23,7 +21,8 @@ For instructions for developers, please refer to [CONTRIBUTING.md](./CONTRIBUTIN
 
 The service is deployed on IBM Cloud. You can visit it at:
 
-- Dev: [https://nyu-promotion-service-fall2103.us-south.cf.appdomain.cloud/](https://nyu-promotion-service-fall2103.us-south.cf.appdomain.cloud/)
+- Dev: [https://nyu-promotion-service-fall2103-dev.us-south.cf.appdomain.cloud/](https://nyu-promotion-service-fall2103-dev.us-south.cf.appdomain.cloud/)
+- Prod: [https://nyu-promotion-service-fall2103.us-south.cf.appdomain.cloud/](https://nyu-promotion-service-fall2103.us-south.cf.appdomain.cloud/)
 
 ## Run locally by Honcho
 
