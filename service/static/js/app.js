@@ -20,6 +20,7 @@ const app = {
       alert: undefined,
       searchMode: undefined,
       promotions: [],
+      promotionsLoading: false,
     };
   },
   methods: {
@@ -182,6 +183,7 @@ const app = {
       }
       try {
         let promotions;
+        this.promotionsLoading = true;
         switch (this.searchMode) {
           default:
           case "name":
@@ -208,6 +210,8 @@ const app = {
       } catch (error) {
         this.showError(error.message);
         return;
+      } finally {
+        this.promotionsLoading = false;
       }
     },
     async onCreateButtonClick() {

@@ -371,32 +371,61 @@
       </div>
       <div class="body">
         <div class="content container" style="padding: 30px 0">
-          <div class="row g-3" id="promotion-list">
-            <div class="col-sm-6 col-md-4" v-for="promotion in promotions">
-              <div class="card promotion-card">
-                <div class="card-body">
-                  <h5 class="card-title">
-                    <span style="color: #999">#{{promotion.id}}</span>
-                    {{promotion.name}}
-                  </h5>
-                  <div class="card-text">
-                    <div class="description">{{promotion.description}}</div>
-                    <div>
-                      <b>Status:</b> {{promotion.active ? 'active' :
-                      'inactive'}}
+          <transition name="section">
+            <div class="promotions-loading" v-if="promotionsLoading">
+              <div class="lds-default promotions-loading-icon">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+              <div class="promotions-loading-text">Loading...</div>
+            </div>
+          </transition>
+          <transition name="section">
+            <div id="promotions-section" v-if="!promotionsLoading">
+              <div class="promotions-empty" v-if="!promotions.length">
+                <img class="promotions-empty-icon" src="img/empty.svg" />
+                <div class="promotions-empty-text">Empty</div>
+              </div>
+              <div class="row g-3" id="promotion-list" v-if="promotions.length">
+                <div class="col-sm-6 col-md-4" v-for="promotion in promotions">
+                  <div class="card promotion-card">
+                    <div class="card-body">
+                      <h5 class="card-title">
+                        <span style="color: #999">#{{promotion.id}}</span>
+                        {{promotion.name}}
+                      </h5>
+                      <div class="card-text">
+                        <div class="description">{{promotion.description}}</div>
+                        <div>
+                          <b>Status:</b> {{promotion.active ? 'active' :
+                          'inactive'}}
+                        </div>
+                        <div>
+                          <b>Product ID:</b> {{promotion.product_id || 'null'}}
+                        </div>
+                        <div><b>Type:</b> {{promotion.type}}</div>
+                        <div><b>Meta:</b> {{promotion.meta}}</div>
+                        <div><b>Begin date:</b> {{promotion.begin_date}}</div>
+                        <div>
+                          <b>End date:</b> {{promotion.end_date || 'null'}}
+                        </div>
+                      </div>
                     </div>
-                    <div>
-                      <b>Product ID:</b> {{promotion.product_id || 'null'}}
-                    </div>
-                    <div><b>Type:</b> {{promotion.type}}</div>
-                    <div><b>Meta:</b> {{promotion.meta}}</div>
-                    <div><b>Begin date:</b> {{promotion.begin_date}}</div>
-                    <div><b>End date:</b> {{promotion.end_date || 'null'}}</div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          </transition>
         </div>
       </div>
       <div class="footer">
