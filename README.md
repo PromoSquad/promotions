@@ -17,6 +17,95 @@ This is still in progress. Additional information, new features and more are bei
 
 For instructions for developers, please refer to [CONTRIBUTING.md](./CONTRIBUTING.md).
 
+## Features
+
+```bash
+.devcontainer
+├── decvontainer.json
+└── docker-compose.yml
+
+.github
+├── ISSUE_TEMPLATE
+│   ├── bug_report.md
+│   └── story.md
+└── workflows
+    └── tes.yml
+
+.vscode
+└── settings.json
+
+features
+├── steps
+│   ├── promotions_steps.py
+│   └── web_steps.py
+├── environment.py    
+└── promotions.feature
+
+lab-flask-restplus-swagger
+├── .devcontainer
+│   ├── devcontainer.json
+│   ├── docker-compose.yml
+│   └── Dockerfile
+├── service
+│   └── static
+│       ├── __init__.py
+│       ├── models.py
+│       ├── routes.py
+│       └── status.py
+├── tests
+│   ├── test_models.py
+│   └── test_routes.py
+├── .coveragerc
+├── .gitignore
+├── .travis.yml
+├── dot-env-example
+├── LICENSE
+├── manifest.yml
+├── Procfile
+├── README.md
+├── requirements.txt
+├── runtime.txt
+├── setup.cfg
+└── Vagrantfile
+
+scripts
+└── manifest.py
+
+service
+├── static
+│   ├── css
+│   │   └── style.css    
+│   ├── img
+│   │   └── logo.svg
+│   ├── js
+│   │   ├── api.js
+│   │   └── app.js
+│   └── index.html
+├── __init__.py
+├── error_handlers.py
+├── models.py
+├── routes.py
+└── status.py
+
+tests
+├── __init__.py
+├── factories.py
+├── test_db_error.py
+└── test_routes.py
+
+.coveragerc
+.gitignore
+config.py
+CONTRIBUTING.md
+LICENSE
+Procfile
+README.md
+requirements.txt
+runtime.txt
+setup.cfg
+Vagrantfile
+```
+
 ## Running on IBM Cloud
 
 The service is deployed on IBM Cloud. You can visit it at:
