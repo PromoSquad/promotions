@@ -114,7 +114,7 @@ class PromotionResource(Resource):
         return promotion.serialize(), status.HTTP_200_OK
 
     #------------------------------------------------------------------
-    # DELETE A PET
+    # DELETE A PROMOTION
     #------------------------------------------------------------------
     @api.doc('delete_promotions')
     @api.response(204, 'Promotion deleted')
